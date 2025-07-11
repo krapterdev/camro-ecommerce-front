@@ -1,50 +1,85 @@
 import React from "react";
-import Shape from "../../../assets/website/images/shape-1.png";
-import Shape1 from "../../../assets/website/images/shape.png";
-import shape2 from "../../../assets/website/images/vit.png";
-import AboutUs from "../../../assets/website/images/decor-primary.svg";
-import AboutUs2 from "../../../assets/website/images/decor-primary.svg";
+import { Link } from "react-router-dom";
+// import Shape from "../../../assets/website/images/shape-1.png";
+// import Shape1 from "../../../assets/website/images/shape.png";
+// import shape2 from "../../../assets/website/images/vit.png";
+// import AboutUs from "../../../assets/website/images/decor-primary.svg";
+// import AboutUs2 from "../../../assets/website/images/decor-primary.svg";
 
 const WebsiteHomeAboutUs = () => {
   return (
     <>
-      <section className="about-us">
-        <div className="shape">
-          <img src={Shape} alt="" />
+      <section className="content-inner001 overflow-hidden">
+        <div className="shape-3">
+          <img src="src/assets/website/images/star.png" alt="" />
         </div>
-        <div className="shape1">
-          <img src={Shape1} alt="" />
+        <div className="shape-2">
+          <img src="src/assets/website/images/star1.png" alt="" />
         </div>
-        <div className="shape2">
-          <img src={shape2} alt="" />
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="eltdf-section-title-holder">
-                <h2 className="eltdf-st-title">
-                  <div className="insight-title--subtitle">
-                    Mangat Ram Dal Mills Pvt. Ltd.
+        <div className="container-fluid">
+          <div className="row align-items-center justify-content-center about-style1">
+            <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <div
+                className="about-one-right wow fadeInRight animated"
+                data-wow-duration="1500ms"
+                data-wow-delay="200ms"
+              >
+                <div className="about-one-right-shape-1"></div>
+                <div className="about-one-right-shape-2"></div>
+                <div className="about-one-right-img">
+                  <div className="tiles">
+                    <div className="tile ">
+                      <img src="src/assets/website/images/1.png" alt="image" />
+                    </div>
                   </div>
-                </h2>
-                <div className="d-flex align-items-center justify-content-center">
-                  <img
-                    src={AboutUs}
-                    alt="about-us"
-                    className="img-fluid d-none d-xl-block"
-                  />
-                  <h5 className="eltdf-st-text">
-                    Mangat Ram Dal Mills Pvt. Ltd. is a renowned online Dal And
-                    Pulses store in Delhi
-                    <br /> that offers a wide range of the best quality
-                    products. We deal in <br />
-                    the manufacturing & processing pulses and rice of etc.
-                  </h5>
-                  <img
-                    src={AboutUs2}
-                    alt="about-us"
-                    className="img-fluid d-none d-xl-block"
-                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-8 justify-content-center">
+              <div className="about-content ">
+                <div
+                  className="section-head style-1 wow fadeInUp"
+                  data-wow-delay="0.4s"
+                >
+                  <div className="shape-1">
+                    <img src="src/assets/website/images/ab-1.webp" alt="" />
+                  </div>
+
+                  <h6 className="text-center">Camro Stainless Steel</h6>
+                  <h3 className="title text-center">
+                    The Most Trusted Brand for Generations <br />
+                    Crafting Cookware that Cooks with Care.
+                  </h3>
+                  <p className="text-center">
+                    Thank you for your interest in CAMRO Products. As you know,
+                    we are one of the <br />
+                    fastest growing MANUFACTURE of Kitchenware, Hotelware, and
+                    <br />
+                    all range of cookware and Pressure Cooker.
+                  </p>
+
+                  <Link to="#" className="text-center">
+                    Shop Collection
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+              <div
+                className="about-one-right wow fadeInRight animated"
+                data-wow-duration="1500ms"
+                data-wow-delay="200ms"
+              >
+                <div className="about-one-right-shape-1"></div>
+                <div className="about-one-right-shape-2"></div>
+                <div className="about-one-right-img">
+                  <div className="tiles">
+                    <div className="tile">
+                      <img src="src/assets/website/images/2.png" alt="image" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

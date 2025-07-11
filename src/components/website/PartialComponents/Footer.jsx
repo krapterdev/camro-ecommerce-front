@@ -9,18 +9,18 @@ import FooterImg from "../../../assets/website/images/footer-img.png";
 import FooterWebmartImg from "../../../assets/website/images/webmartindia.png";
 
 const Footer = () => {
-  const [Footercategories, setFooterCategories] = useState([]);
+  // const [Footercategories, setFooterCategories] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        setFooterCategories(data);
-      })
-      .catch((err) => {
-        console.error("Error fetching categories:", err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/categories")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setFooterCategories(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error fetching categories:", err);
+  //     });
+  // }, []);
 
   return (
     <>

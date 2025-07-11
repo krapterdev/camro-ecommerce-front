@@ -48,117 +48,117 @@ const Header = () => {
     }
   }, []);
 
-  const handleheaderCategories = async () => {
-    setCategoryIsLoading(true);
-    setCategoryError("");
-    try {
-      const response = await fetch(API_URL + "allCategories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          domain_name: BASE_URL,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      setHeaderCategory(result.data);
-    } catch (err) {
-      setCategoryError("Failed to update status.");
-      console.error("Error updating status:", err);
-    } finally {
-      setCategoryIsLoading(false);
-    }
-  };
+  // const handleheaderCategories = async () => {
+  //   setCategoryIsLoading(true);
+  //   setCategoryError("");
+  //   try {
+  //     const response = await fetch(API_URL + "allCategories", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         domain_name: BASE_URL,
+  //       }),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     const result = await response.json();
+  //     setHeaderCategory(result.data);
+  //   } catch (err) {
+  //     setCategoryError("Failed to update status.");
+  //     console.error("Error updating status:", err);
+  //   } finally {
+  //     setCategoryIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    handleheaderCategories();
-  }, []);
+  // useEffect(() => {
+  //   handleheaderCategories();
+  // }, []);
 
-  const allProducts = async () => {
-    setHomeProductIsLoading(true);
-    try {
-      const response = await fetch(API_URL + "allProducts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          domain_name: BASE_URL,
-        }),
-      });
+  // const allProducts = async () => {
+  //   setHomeProductIsLoading(true);
+  //   try {
+  //     const response = await fetch(API_URL + "allProducts", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         domain_name: BASE_URL,
+  //       }),
+  //     });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
 
-      const result = await response.json();
-      if (result.data !== "0") {
-        setAllProducts(result.data);
-      } else {
-        setAllProducts([]);
-      }
-    } catch (err) {
-      setError("Failed to update status.");
-      console.error("Error updating status:", err);
-    } finally {
-      setHomeProductIsLoading(false);
-    }
-  };
+  //     const result = await response.json();
+  //     if (result.data !== "0") {
+  //       setAllProducts(result.data);
+  //     } else {
+  //       setAllProducts([]);
+  //     }
+  //   } catch (err) {
+  //     setError("Failed to update status.");
+  //     console.error("Error updating status:", err);
+  //   } finally {
+  //     setHomeProductIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    allProducts();
-  }, []);
+  // useEffect(() => {
+  //   allProducts();
+  // }, []);
 
   // ----------------------------------------------------
 
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("auth_user"));
+  // const navigate = useNavigate();
+  // const user = JSON.parse(localStorage.getItem("auth_user"));
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth_user");
-    // localStorage.removeItem("cart_items");
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("auth_user");
+  //   // localStorage.removeItem("cart_items");
+  //   navigate("/login");
+  // };
 
-  const [categories, setCategories] = useState([]);
-  const { getCartCount } = useContext(CartContext);
+  // const [categories, setCategories] = useState([]);
+  // const { getCartCount } = useContext(CartContext);
 
   // const { cartItems, getCartCount } = useContext(CartContext);
   // const modalId = cartItems.length > 0 ? "shoppingCartfull" : "shoppingCart";
 
-  useEffect(() => {
-    fetch("http://localhost:8000/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((err) => {
-        console.error("Error fetching categories:", err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/categories")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCategories(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error fetching categories:", err);
+  //     });
+  // }, []);
 
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const updateCartCount = () => {
-      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-      const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-      setCount(total);
-    };
+  // useEffect(() => {
+  //   const updateCartCount = () => {
+  //     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  //     const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  //     setCount(total);
+  //   };
 
-    updateCartCount();
+  //   updateCartCount();
 
-    // Listen for cart updates
-    window.addEventListener("cartUpdated", updateCartCount);
+  //   // Listen for cart updates
+  //   window.addEventListener("cartUpdated", updateCartCount);
 
-    return () => {
-      window.removeEventListener("cartUpdated", updateCartCount);
-    };
-  }, [count, setCount]);
+  //   return () => {
+  //     window.removeEventListener("cartUpdated", updateCartCount);
+  //   };
+  // }, [count, setCount]);
 
   return (
     <>
