@@ -46,7 +46,7 @@ const WebsiteSlider = () => {
           data-bs-slide="next"
         >
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
+          <span className="visually-hidden">Nexts</span>
         </button>
       </div>
     </>
