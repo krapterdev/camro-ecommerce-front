@@ -27,12 +27,12 @@ const Home = () => {
       <WebsiteHomeSlidersecond />
       <WebsiteHomeWhyChooseUs />
       <WebsiteHomeStrengthofBrass />
-      <WebsiteHomePressureMaster/>
-      <WebsiteHomeVideoSection/>
-      <WebsiteHomeFeatureFreeShipping/>
-      <WebsiteHomeDealsofTheDay/>
-      <WebsiteHomeNewarrivals/>
-      <WebsiteHomeBlogUpdate/>
+      <WebsiteHomePressureMaster />
+      <WebsiteHomeVideoSection />
+      <WebsiteHomeFeatureFreeShipping />
+      <WebsiteHomeDealsofTheDay />
+      <WebsiteHomeNewarrivals />
+      <WebsiteHomeBlogUpdate />
       <WebsiteHomeHappyClients />
     </>
   );

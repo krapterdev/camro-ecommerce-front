@@ -34,7 +34,10 @@ const WebsiteHomeSlidersecond = () => {
             <SwiperSlide>
               <div className="home8-slide-item">
                 <div className="home8-slide-image">
-                  <img src="src/assets/website/images/cooker-1.png" alt="Slide Image" />
+                  <img
+                    src="src/assets/website/images/cooker-1.png"
+                    alt="Slide Image"
+                  />
                 </div>
                 <div className="home8-slide-content">
                   <span className="sub-title">Just for you</span>
@@ -59,7 +62,10 @@ const WebsiteHomeSlidersecond = () => {
             <SwiperSlide>
               <div className="home8-slide-item">
                 <div className="home8-slide-image">
-                  <img src="src/assets/website/images/cooker-3.png" alt="Slide Image" />
+                  <img
+                    src="src/assets/website/images/cooker-3.png"
+                    alt="Slide Image"
+                  />
                 </div>
                 <div className="home8-slide-content">
                   <span className="sub-title">Just for you</span>
@@ -84,7 +90,10 @@ const WebsiteHomeSlidersecond = () => {
             <SwiperSlide>
               <div className="home8-slide-item">
                 <div className="home8-slide-image">
-                  <img src="src/assets/website/images/cooker-5.png" alt="Slide Image" />
+                  <img
+                    src="src/assets/website/images/cooker-5.png"
+                    alt="Slide Image"
+                  />
                 </div>
                 <div className="home8-slide-content">
                   <span className="sub-title">Just for you</span>

@@ -1,18 +1,16 @@
-import LogInBreadCrumb from '../../components/website/LogInPageComponents/LogInBreadCrumb';
-import LoginSection from '../../components/website/LogInPageComponents/LoginSection';
-import useSEO from '../../hooks/useSEO';
+import WebsiteLoginPage from "../../components/website/LogInPageComponents/WebsiteLoginPage";
+import useSEO from "../../hooks/useSEO";
 
 const LogIn = () => {
   useSEO({
-    title: 'Log In - Mangatram',
-    description: 'Learn more about Mangatram and our mission.',
-    keywords: 'about, mangatram, company'
+    title: "Log In - Camro",
+    description: "Learn more about Camro and our mission.",
+    keywords: "about, Camro, company",
   });
 
   return (
     <>
-      <LogInBreadCrumb />
-      <LoginSection />
+      <WebsiteLoginPage />
     </>
   );
 };

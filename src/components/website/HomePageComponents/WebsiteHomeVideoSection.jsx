@@ -5,7 +5,13 @@ const WebsiteHomeVideoSection = () => {
   return (
     <>
       <section className="Video">
-        <video src="src/assets/website/images/video.mp4" loop autoPlay muted className="w-100" />
+        <video
+          src="src/assets/website/images/video.mp4"
+          loop
+          autoPlay
+          muted
+          className="w-100"
+        />
       </section>
     </>
   );

@@ -290,7 +290,7 @@ const Header = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/whyUs"
+                      to="/why-us"
                       className={({ isActive }) => (isActive ? "active" : "")}
                     >
                       Why Us
@@ -345,8 +345,7 @@ const Header = () => {
                   <ul className="header-right">
                     <li className="nav-item login-link">
                       <Link className="nav-link" to="/login">
-                        {" "}
-                        Login / Register{" "}
+                        Login / Register
                       </Link>
                     </li>
                     <li className="nav-item search-link">
@@ -379,7 +378,6 @@ const Header = () => {
                         data-bs-target="#offcanvasRight"
                         aria-controls="offcanvasRight"
                       >
-                        {" "}
                         <i className="iconly-Broken-Buy"></i>
                         <span className="badge badge-circle">{cartCount}</span>
                       </Link>
@@ -567,7 +565,7 @@ const Header = () => {
                           </div>
                         </div>
                         <Link
-                          to="shop-checkout.html"
+                          to="/checkout"
                           className="btn btn-outline-secondary btn-block m-b20"
                         >
                           Checkout

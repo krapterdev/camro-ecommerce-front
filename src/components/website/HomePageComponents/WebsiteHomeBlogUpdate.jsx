@@ -44,7 +44,10 @@ const WebsiteHomeBlogUpdate = () => {
                   <div className="blog">
                     <div className="image">
                       <Link to="#">
-                        <img src="src/assets/website/images/b-1.png" alt="Blog Image" />
+                        <img
+                          src="src/assets/website/images/b-1.png"
+                          alt="Blog Image"
+                        />
                       </Link>
                     </div>
                     <div className="content">
@@ -78,7 +81,10 @@ const WebsiteHomeBlogUpdate = () => {
                   <div className="blog">
                     <div className="image">
                       <Link to="#">
-                        <img src="src/assets/website/images/b-2.png" alt="Blog Image" />
+                        <img
+                          src="src/assets/website/images/b-2.png"
+                          alt="Blog Image"
+                        />
                       </Link>
                     </div>
                     <div className="content">
