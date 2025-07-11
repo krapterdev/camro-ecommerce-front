@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 
 const WebsiteHomeFeaturesCategory = () => {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   // useEffect(() => {
   //   fetch("http://localhost:8000/categories")
