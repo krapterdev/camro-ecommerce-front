@@ -13,17 +13,18 @@ const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
 const WebsiteHomeFeaturesCategory = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // ✅ error state
 
   useEffect(() => {
     axios
       .get(`${webURL}/categories`)
       .then((res) => {
-        console.log(res.data);
         setCategories(res.data);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching categories:", err);
+        setError("Server is down. Please try again later."); // ✅ error message
         setLoading(false);
       });
   }, []);
@@ -40,6 +41,15 @@ const WebsiteHomeFeaturesCategory = () => {
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
+              ) : error ? (
+                <div className="text-center py-5 text-danger">
+                  <p>{error}</p>
+                </div>
+              ) : categories.filter((item) => item.status !== 0).length ===
+                0 ? (
+                <div className="text-center py-5 text-muted">
+                  <p>No categories found.</p>
+                </div>
               ) : (
                 <Swiper
                   modules={[Navigation]}
@@ -54,7 +64,7 @@ const WebsiteHomeFeaturesCategory = () => {
                 >
                   {categories
                     .filter((item) => item.status !== 0)
-                    .map((item, index) => (
+                    .map((item) => (
                       <SwiperSlide key={item.id}>
                         <div
                           className="shop-box style-1 wow fadeInUp"
