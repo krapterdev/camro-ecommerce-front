@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import AdminAvtarImg from "../../../assets/admin/images/users/avatar-1.jpg";
+import titleData from "./titleData";
 
-const AdminTopbar = ({ title = "Hello Krapter!" }) => {
+const AdminTopbar = () => {
+  const location = useLocation();
+  const title = titleData[location.pathname] || "Admin Panel";
+
   return (
     <header className="topbar">
       <div className="container-fluid">
@@ -71,7 +77,7 @@ const AdminTopbar = ({ title = "Hello Krapter!" }) => {
                   <img
                     className="rounded-circle"
                     width="32"
-                    src="/admin_assets/images/users/avatar-1.jpg"
+                    src={AdminAvtarImg}
                     alt="avatar"
                   />
                 </span>

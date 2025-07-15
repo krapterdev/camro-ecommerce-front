@@ -22,6 +22,8 @@ const ShoppingCart = lazy(() => import("./pages/website/ShoppingCart"));
 // 🛠 Lazy load admin pages
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const Blogs = lazy(() => import("./pages/admin/Blogs"));
+const AddCategory = lazy(() => import("./pages/admin/AddCategory"));
+const ListCategory = lazy(() => import("./pages/admin/ListCategory"));
 const Settings = lazy(() => import("./pages/admin/Settings"));
 
 function App() {
@@ -40,7 +42,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/:category" element={<CategoryPage />} />
-          <Route path="/:category/:slug" element={<ProductDetailPage />} />
+          {/* <Route path="/:category/:slug" element={<ProductDetailPage />} /> */}
           <Route path="/login" element={<LogIn />} />
           <Route path="/register" element={<LogIn />} />
           <Route path="/orders" element={<LogIn />} />
@@ -52,6 +54,9 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="add-category" element={<AddCategory />} />
+          <Route path="add-category/:catid" element={<AddCategory />} />
+          <Route path="manage-category" element={<ListCategory />} />
         </Route>
       </Routes>
     </Suspense>
