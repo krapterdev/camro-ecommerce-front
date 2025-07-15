@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
 
 const AddCat = () => {
   const { catid: id } = useParams(); // if editing
@@ -197,8 +198,9 @@ const AddCat = () => {
 
                 {id && existingImage && (
                   <div className="mt-3">
+                    
                     <img
-                      src={`${baseURL}/storage/media/category/${existingImage}`}
+                      src={`${imgUrl}/category/${existingImage}`}
                       alt="Existing Category"
                       className="img-thumbnail"
                       width="150"
