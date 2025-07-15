@@ -17,11 +17,27 @@ const sideMenuItems = [
     title: "Products",
     icon: "solar:t-shirt-bold-duotone",
     children: [
-      { title: "List", path: "/admin/products/list" },
-      { title: "Grid", path: "/admin/products/grid" },
-      { title: "Details", path: "/admin/products/details" },
-      { title: "Edit", path: "/admin/products/edit" },
-      { title: "Create", path: "/admin/products/create" },
+      { title: "Create Products", path: "/admin/products/add" },
+      { title: "Manage Products", path: "/admin/products/list" },
+      { title: "Manage Size", path: "/admin/products/size" },
+      { title: "Manage Pack", path: "/admin/products/pack" },
+      { title: "Manage Discount", path: "/admin/products/discount" },
+    ],
+  },
+  {
+    title: "Products Weight",
+    icon: "mdi:weight-gram",
+    children: [
+      { title: "Create Weight", path: "/admin/products/weight/add" },
+      { title: "Manage Weight", path: "/admin/products/weight/list" },
+    ],
+  },
+  {
+    title: "Products Size",
+    icon: "ri:custom-size",
+    children: [
+      { title: "Create Size", path: "/admin/products/size/add" },
+      { title: "Manage Size", path: "/admin/products/size/list" },
     ],
   },
   {

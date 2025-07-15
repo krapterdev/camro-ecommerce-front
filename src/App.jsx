@@ -6,6 +6,8 @@ import WebsiteLayout from "./layouts/WebsiteLayout";
 import AdminLayout from "./layouts/AdminLayout";
 
 import Checkout from "./pages/website/Checkout";
+import AddProductSize from "./pages/admin/AddProductSize";
+import ListProductSize from "./pages/admin/ListProductSize";
 
 // 🐢 Lazy load website pages
 const Home = lazy(() => import("./pages/website/Home"));
@@ -25,6 +27,13 @@ const Blogs = lazy(() => import("./pages/admin/Blogs"));
 const AddCategory = lazy(() => import("./pages/admin/AddCategory"));
 const ListCategory = lazy(() => import("./pages/admin/ListCategory"));
 const Settings = lazy(() => import("./pages/admin/Settings"));
+// const AdminAddProduct = lazy(() => import("./pages/admin/AddCategory"));
+// const AdminListProducts = lazy(() => import("./pages/admin/ListCategory"));
+// const AdminProductSize = lazy(() => import("./pages/admin/AddCategory"));
+// const AdminProductPack = lazy(() => import("./pages/admin/AddCategory"));
+// const AdminProductDiscount = lazy(() => import("./pages/admin/AddCategory"));
+const AddProductWeight = lazy(() => import("./pages/admin/AddProductWeight"));
+const ListProductWeight = lazy(() => import("./pages/admin/ListProductWeight"));
 
 function App() {
   return (
@@ -57,6 +66,18 @@ function App() {
           <Route path="add-category" element={<AddCategory />} />
           <Route path="add-category/:catid" element={<AddCategory />} />
           <Route path="manage-category" element={<ListCategory />} />
+
+          {/* products routes  */}
+          <Route path="products">
+            <Route path="weight">
+              <Route path="add" element={<AddProductWeight />} />
+              <Route path="list" element={<ListProductWeight />} />
+            </Route>
+            <Route path="size">
+              <Route path="add" element={<AddProductSize />} />
+              <Route path="list" element={<ListProductSize />} />
+            </Route>
+          </Route>
         </Route>
       </Routes>
     </Suspense>
