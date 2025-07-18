@@ -209,9 +209,9 @@ const AddProductComponent = () => {
             // required
             className="form-control"
           />
-          {errors.category_id && (
+          {errors.product_image1 && (
             <div className="alert alert-danger mt-2">
-              {errors.category_id[0]}
+              {errors.product_image1[0]}
             </div>
           )}
         </div>
@@ -224,9 +224,9 @@ const AddProductComponent = () => {
             // required
             className="form-control"
           />
-          {errors.category_id && (
+          {errors.product_image2 && (
             <div className="alert alert-danger mt-2">
-              {errors.category_id[0]}
+              {errors.product_image2[0]}
             </div>
           )}
         </div>
