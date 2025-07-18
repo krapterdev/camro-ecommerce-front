@@ -7,87 +7,73 @@ import "react-toastify/dist/ReactToastify.css";
 const baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const ListWeight = () => {
-  const [categories, setCategories] = useState([]);
+  const [weights, setWeights] = useState([]);
 
-  const fetchCategories = async () => {
+  const fetchWeights = async () => {
     try {
-      const response = await axios.get(`${baseURL}/category/categories`);
-      setCategories(response.data);
+      const response = await axios.get(`${baseURL}/products/weight/list`);
+      setWeights(response.data);
     } catch (error) {
-      console.error("Error fetching categories", error);
-      toast.error("Failed to load categories");
+      toast.error("Failed to load weights");
     }
   };
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`${baseURL}/category/status/${id}/${newStatus}`);
+      await axios.put(`${baseURL}/products/weight/status/${id}/${newStatus}`);
       toast.success("Status updated!");
-      fetchCategories();
+      fetchWeights();
     } catch (error) {
       toast.error("Error changing status");
     }
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
+    if (window.confirm("Are you sure you want to delete this weight?")) {
       try {
-        await axios.delete(`${baseURL}/category/delete/${id}`);
-        toast.success("Category deleted!");
-        fetchCategories();
+        await axios.delete(`${baseURL}/products/weight/delete/${id}`);
+        toast.success("Weight deleted!");
+        fetchWeights();
       } catch (error) {
-        toast.error("Error deleting category");
+        toast.error("Error deleting weight");
       }
     }
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchWeights();
   }, []);
 
   return (
     <div className="container-fluid">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        transition={Bounce}
-        theme="light"
-      />
+      <ToastContainer transition={Bounce} position="bottom-left" autoClose={2000} />
       <div className="row">
         <div className="col-xl-12">
           <div className="card">
             <div className="card-header d-flex justify-content-between align-items-center">
-              <h4 className="mb-0">Manage Categories</h4>
-              <Link to="/admin/add-category">
-                <button className="btn btn-primary">+ Add Category</button>
+              <h4 className="mb-0">Manage Product Weights</h4>
+              <Link to="/admin/products/weight/add">
+                <button className="btn btn-primary">+ Add Weight</button>
               </Link>
             </div>
-
             <div className="table-responsive p-3">
-              <table className="table table-hover table-bordered text-center">
+              <table className="table table-bordered text-center">
                 <thead className="bg-light">
                   <tr>
-                    <th>ID</th>
-                    <th>Category Name</th>
-                    <th>Slug</th>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Value</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {categories.length > 0 ? (
-                    categories.map((row, index) => (
+                  {weights.length > 0 ? (
+                    weights.map((row, index) => (
                       <tr key={row.id}>
                         <td>{index + 1}</td>
-                        <td>{row.category_name}</td>
-                        <td>{row.category_slug}</td>
+                        <td>{row.title}</td>
+                        <td>{row.value}</td>
                         <td>
                           {row.status === 1 ? (
                             <button
@@ -106,7 +92,7 @@ const ListWeight = () => {
                           )}
                         </td>
                         <td>
-                          <Link to={`/admin/add-category/${row.id}`}>
+                          <Link to={`/admin/products/weight/add/${row.id}`}>
                             <button className="btn btn-outline-success btn-sm me-2">
                               Edit
                             </button>
@@ -122,15 +108,12 @@ const ListWeight = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="5" className="text-muted">
-                        No categories found.
-                      </td>
+                      <td colSpan="5">No product weights found.</td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
-            {/* end table-responsive */}
           </div>
         </div>
       </div>

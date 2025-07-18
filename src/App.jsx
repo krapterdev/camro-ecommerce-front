@@ -25,6 +25,8 @@ const ShoppingCart = lazy(() => import("./pages/website/ShoppingCart"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const Blogs = lazy(() => import("./pages/admin/Blogs"));
 const AddCategory = lazy(() => import("./pages/admin/AddCategory"));
+const AddProduct = lazy(() => import("./pages/admin/AddProduct"));
+const ListProduct = lazy(() => import("./pages/admin/ListProduct"));
 const ListCategory = lazy(() => import("./pages/admin/ListCategory"));
 const Settings = lazy(() => import("./pages/admin/Settings"));
 // const AdminAddProduct = lazy(() => import("./pages/admin/AddCategory"));
@@ -43,7 +45,7 @@ function App() {
       }
     >
       <Routes>
-        {/* 🌐 Website Routes */}
+        {/* Website Routes */}
         <Route element={<WebsiteLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -58,7 +60,7 @@ function App() {
           <Route path="/shopping-cart" element={<ShoppingCart />} />
         </Route>
 
-        {/* 🔒 Admin Routes */}
+        {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="blogs" element={<Blogs />} />
@@ -67,14 +69,22 @@ function App() {
           <Route path="add-category/:catid" element={<AddCategory />} />
           <Route path="manage-category" element={<ListCategory />} />
 
-          {/* products routes  */}
+          {/* products routes */}
           <Route path="products">
+
+            {/* Product (main) routes */}
+            <Route path="add" element={<AddProduct />} />
+            <Route path="add/:productid" element={<AddProduct />} />
+            <Route path="list" element={<ListProduct />} />
+
             <Route path="weight">
               <Route path="add" element={<AddProductWeight />} />
+              <Route path="add/:weightid" element={<AddProductWeight />} />
               <Route path="list" element={<ListProductWeight />} />
             </Route>
             <Route path="size">
               <Route path="add" element={<AddProductSize />} />
+              <Route path="add/:sizeid" element={<AddProductSize />} />
               <Route path="list" element={<ListProductSize />} />
             </Route>
           </Route>

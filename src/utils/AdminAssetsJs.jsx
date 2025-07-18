@@ -7,7 +7,7 @@ const AdminAssetsJs = () => {
     "/src/assets/admin/vendor/jsvectormap/jsvectormap.min.js",
     "/src/assets/admin/vendor/jsvectormap/maps/world-merc.js",
     "/src/assets/admin/vendor/jsvectormap/maps/world.js",
-    "/src/assets/admin/js/pages/dashboard.js",
+    // "/src/assets/admin/js/pages/dashboard.js",
   ]);
 
   return null;

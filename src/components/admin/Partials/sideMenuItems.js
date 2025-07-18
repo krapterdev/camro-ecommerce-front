@@ -19,9 +19,8 @@ const sideMenuItems = [
     children: [
       { title: "Create Products", path: "/admin/products/add" },
       { title: "Manage Products", path: "/admin/products/list" },
-      { title: "Manage Size", path: "/admin/products/size" },
-      { title: "Manage Pack", path: "/admin/products/pack" },
-      { title: "Manage Discount", path: "/admin/products/discount" },
+      // { title: "Manage Pack", path: "/admin/products/pack" },
+      // { title: "Manage Discount", path: "/admin/products/discount" },
     ],
   },
   {

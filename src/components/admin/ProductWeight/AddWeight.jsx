@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const AddWeight = () => {
-  const { id } = useParams(); // weight ID
+  const { weightid: id } = useParams(); // weight ID
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -74,7 +74,7 @@ const AddWeight = () => {
       );
 
       setTimeout(() => {
-        navigate("/admin/manage-productweight");
+        navigate("/admin/products/weight/list");
       }, 1000);
     } catch (error) {
       if (error.response?.data?.errors) {

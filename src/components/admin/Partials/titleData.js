@@ -8,7 +8,7 @@ const titleData = {
   "/admin/products/grid": "Product Grid",
   "/admin/products/details": "Product Details",
   "/admin/products/edit": "Edit Product",
-  "/admin/products/create": "Create Product",
+  "/admin/products/add": "Create Product",
   "/admin/inventory/warehouse": "Warehouse",
   "/admin/inventory/received-orders": "Received Orders",
   "/admin/orders/list": "Order List",
