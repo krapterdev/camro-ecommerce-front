@@ -5,15 +5,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
-const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
 
 const AddWeight = () => {
-  const { catid: id } = useParams(); // if editing
+  const { id } = useParams(); // weight ID
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    productweight_name: "",
-    productweight_slug: "",
+    title: "",
+    value: "",
     status: true,
   });
 
@@ -21,11 +20,11 @@ const AddWeight = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`${baseURL}/productweight/${id}`).then((res) => {
-        const data = res.data;
+      axios.get(`${baseURL}/products/weight/edit/${id}`).then((res) => {
+        const data = res.data.data;
         setFormData({
-          productweight_name: data.productweight_name,
-          productweight_slug: data.productweight_slug,
+          title: data.title,
+          value: data.value,
           status: data.status === 1,
         });
       });
@@ -33,20 +32,20 @@ const AddWeight = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
+    const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
       setFormData({ ...formData, [name]: checked });
     } else {
       setFormData({ ...formData, [name]: value });
 
-      if (name === "productweight_name") {
+      if (name === "title") {
         const slug = value
           .toLowerCase()
           .replace(/[^a-z0-9\s-]/g, "")
           .replace(/\s+/g, "-")
           .replace(/-+/g, "-");
-        setFormData((prev) => ({ ...prev, productweight_slug: slug }));
+        setFormData((prev) => ({ ...prev, value: slug }));
       }
     }
   };
@@ -55,24 +54,23 @@ const AddWeight = () => {
     e.preventDefault();
     setErrors({});
 
-    const data = new FormData();
-    data.append("productweight_name", formData.productweight_name);
-    data.append("productweight_slug", formData.productweight_slug);
-    data.append("status", formData.status ? 1 : 0);
+    const data = {
+      title: formData.title,
+      value: formData.value,
+      status: formData.status ? 1 : 0,
+    };
 
     try {
       const url = id
-        ? `${baseURL}/productweight/update/${id}`
-        : `${baseURL}/productweight/add-productweight`;
+        ? `${baseURL}/products/weight/update/${id}`
+        : `${baseURL}/products/weight/add`;
 
-      await axios.post(url, data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(url, data);
 
       toast.success(
         id
-          ? `ProductWeight "${formData.productweight_name}" updated successfully!`
-          : `ProductWeight "${formData.productweight_name}" created successfully!`
+          ? `Weight "${formData.title}" updated successfully!`
+          : `Weight "${formData.title}" created successfully!`
       );
 
       setTimeout(() => {
@@ -91,55 +89,48 @@ const AddWeight = () => {
     <div className="container-xxl">
       <div className="row">
         <div className="col-xl-12 col-lg-8">
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-            {/* ProductWeight Info */}
+          <form onSubmit={handleSubmit}>
             <div className="card mb-3">
               <div className="card-header">
-                <h4 className="card-title">ProductWeight Information</h4>
+                <h4 className="card-title">Product Weight Information</h4>
               </div>
               <div className="card-body row">
                 <div className="col-lg-6 mb-3">
-                  <label className="form-label">
-                    ProductWeight Name <span className="text-primary">*</span>
-                  </label>
+                  <label className="form-label">Weight Title *</label>
                   <input
                     type="text"
                     className="form-control"
-                    name="productweight_name"
-                    value={formData.productweight_name}
+                    name="title"
+                    value={formData.title}
                     onChange={handleChange}
                     required
                   />
-                  {errors.productweight_name && (
+                  {errors.title && (
                     <div className="alert alert-danger mt-2">
-                      {errors.productweight_name[0]}
+                      {errors.title[0]}
                     </div>
                   )}
                 </div>
 
                 <div className="col-lg-6 mb-3">
-                  <label className="form-label">
-                    ProductWeight Slug <span className="text-primary">*</span>
-                  </label>
+                  <label className="form-label"> Weight Value *</label>
                   <input
                     type="text"
                     className="form-control"
-                    name="productweight_slug"
-                    value={formData.productweight_slug}
+                    name="value"
+                    value={formData.value}
                     onChange={handleChange}
                     required
                   />
-                  {errors.productweight_slug && (
+                  {errors.value && (
                     <div className="alert alert-danger mt-2">
-                      {errors.productweight_slug[0]}
+                      {errors.value[0]}
                     </div>
                   )}
                 </div>
 
                 <div className="col-lg-4">
-                  <h5 className="fw-medium mb-2">
-                    ProductWeight Status <span className="text-primary">*</span>
-                  </h5>
+                  <h5 className="fw-medium mb-2">Status *</h5>
                   <div className="form-check form-switch">
                     <input
                       className="form-check-input"
@@ -157,12 +148,11 @@ const AddWeight = () => {
               </div>
             </div>
 
-            {/* Submit */}
             <div className="card p-3">
               <div className="row justify-content-end">
                 <div className="col-lg-2">
                   <button className="btn btn-primary w-100" type="submit">
-                    {id ? "Update ProductWeight" : "Create ProductWeight"}
+                    {id ? "Update" : "Create"}
                   </button>
                 </div>
               </div>
