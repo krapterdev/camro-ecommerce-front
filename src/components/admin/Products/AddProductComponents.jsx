@@ -1,231 +1,395 @@
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-const baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
-const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
-
-const function AddProductComponents() {
- = () => {
-  const { catid: id } = useParams(); // if editing
-  const navigate = useNavigate();
-
+const AddProductComponent = () => {
   const [formData, setFormData] = useState({
-    category_name: "",
-    category_slug: "",
-    status: true,
-    image: null,
+    product_name: "",
+    product_slug: "",
+    category_id: "",
+    description: "",
+    product_image1: null,
+    product_image2: null,
   });
 
-  const [existingImage, setExistingImage] = useState(null);
+  const [priceRows, setPriceRows] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [weights, setWeights] = useState([]);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (id) {
-      axios.get(`${baseURL}/category/${id}`).then((res) => {
-        const data = res.data;
-        setFormData({
-          category_name: data.category_name,
-          category_slug: data.category_slug,
-          status: data.status === 1,
-          image: null,
-        });
-        setExistingImage(data.category_img);
-      });
-    }
-  }, [id]);
+    axios
+      .get("http://127.0.0.1:8000/api/admin/category/categories")
+      .then((res) => setCategories(res.data));
+    axios
+      .get("http://127.0.0.1:8000/api/admin/products/size/list")
+      .then((res) => setSizes(res.data));
+    axios
+      .get("http://127.0.0.1:8000/api/admin/products/weight/list")
+      .then((res) => setWeights(res.data));
+  }, []);
 
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-
-    if (type === "checkbox") {
-      setFormData({ ...formData, [name]: checked });
-    } else if (type === "file") {
-      setFormData({ ...formData, image: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-
-      if (name === "category_name") {
-        const slug = value
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+      ...(name === "product_name" && {
+        product_slug: value
           .toLowerCase()
           .replace(/[^a-z0-9\s-]/g, "")
           .replace(/\s+/g, "-")
-          .replace(/-+/g, "-");
-        setFormData((prev) => ({ ...prev, category_slug: slug }));
-      }
-    }
+          .replace(/-+/g, "-"),
+      }),
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: files[0] }));
+  };
+
+  const handleDescriptionChange = (value) => {
+    setFormData((prev) => ({ ...prev, description: value }));
+  };
+
+  const handleRowChange = (index, e) => {
+    const updated = [...priceRows];
+    updated[index][e.target.name] = e.target.value;
+
+    const mrp = parseFloat(updated[index].mrp_price) || 0;
+    const discount = parseFloat(updated[index].discount) || 0;
+    const inputTax = updated[index].tax_in_value;
+
+    const sellingPrice = mrp - (mrp * discount) / 100;
+    const taxVal = parseFloat(inputTax);
+    const taxValue = !isNaN(taxVal) && taxVal > 0 ? taxVal : 40;
+    const netPrice = sellingPrice + taxValue;
+
+    updated[index].selling_price = sellingPrice.toFixed(2);
+    updated[index].tax_in_value = inputTax;
+    updated[index].net_price = netPrice.toFixed(2);
+
+    setPriceRows(updated);
+  };
+
+  const handleRowImageChange = (index, e) => {
+    const updated = [...priceRows];
+    updated[index].images = Array.from(e.target.files);
+    setPriceRows(updated);
+  };
+
+  const addPriceRow = () => {
+    setPriceRows((prev) => [
+      ...prev,
+      {
+        size: "",
+        size_type: "",
+        weight: "",
+        weight_type: "",
+        mrp_price: "",
+        discount: "",
+        selling_price: "",
+        tax_in_value: "",
+        net_price: "",
+        productcode: "",
+        images: [],
+      },
+    ]);
+  };
+
+  const removePriceRow = (index) => {
+    const updated = [...priceRows];
+    updated.splice(index, 1);
+    setPriceRows(updated);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({});
+    const payload = new FormData();
 
-    // Check if image is required in add mode
-    if (!id && !formData.image) {
-      setErrors({ category_image: ["Category image is required."] });
-      return;
-    }
+    if (formData.img1) payload.append("product_image1", formData.img1);
+    if (formData.img2) payload.append("product_image2", formData.img2);
 
-    const data = new FormData();
-    data.append("category_name", formData.category_name);
-    data.append("category_slug", formData.category_slug);
-    data.append("status", formData.status ? 1 : 0);
-    if (formData.image) {
-      data.append("category_image", formData.image);
-    }
+    payload.append("product_name", formData.product_name);
+    payload.append("product_slug", formData.product_slug);
+    payload.append("product_desc", formData.description);
+    payload.append("category_id", formData.category_id);
 
-    try {
-      const url = id
-        ? `${baseURL}/category/update/${id}`
-        : `${baseURL}/category/add-category`;
-
-      await axios.post(url, data, {
-        headers: { "Content-Type": "multipart/form-data" },
+    priceRows.forEach((row, idx) => {
+      row.images?.forEach((file, i) => {
+        payload.append(`more_images[${idx}_${i}]`, file); // optional if Laravel stores as flat list
       });
+    });
 
-      toast.success(
-        id
-          ? `Category "${formData.category_name}" updated successfully!`
-          : `Category "${formData.category_name}" created successfully!`
-      );
+    const rowsToSend = priceRows.map(({ images, ...rest }) => rest);
+    payload.append("weights", JSON.stringify(rowsToSend));
 
-      setTimeout(() => {
-        navigate("/admin/manage-category");
-      }, 1000);
-    } catch (error) {
-      if (error.response?.data?.errors) {
-        setErrors(error.response.data.errors);
-      } else {
-        toast.error("Something went wrong!");
-      }
-    }
+    axios
+      .post("http://127.0.0.1:8000/api/admin/products/add", payload)
+      .then((res) => {
+        console.log("Saved!", res.data);
+        alert("Product added successfully!");
+      })
+      .catch((err) => {
+        if (err.response?.data?.errors) {
+          setErrors(err.response.data.errors);
+        }
+      });
   };
 
   return (
-    <div className="container-xxl">
-      <div className="row">
-        <div className="col-xl-12 col-lg-8">
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-            {/* Category Info */}
-            <div className="card mb-3">
-              <div className="card-header">
-                <h4 className="card-title">Category Information</h4>
-              </div>
-              <div className="card-body row">
-                <div className="col-lg-6 mb-3">
-                  <label className="form-label">
-                    Category Name <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="category_name"
-                    value={formData.category_name}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.category_name && (
-                    <div className="alert alert-danger mt-2">
-                      {errors.category_name[0]}
-                    </div>
-                  )}
-                </div>
+    <form
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+      className="container"
+    >
+      <div className="row mb-3">
+        <div className="col-4">
+          <label>Product Name</label>
+          <input
+            name="product_name"
+            value={formData.product_name}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
 
-                <div className="col-lg-6 mb-3">
-                  <label className="form-label">
-                    Category Slug <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="category_slug"
-                    value={formData.category_slug}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.category_slug && (
-                    <div className="alert alert-danger mt-2">
-                      {errors.category_slug[0]}
-                    </div>
-                  )}
-                </div>
-
-                <div className="col-lg-4">
-                  <h5 className="fw-medium mb-2">
-                    Category Status <span className="text-primary">*</span>
-                  </h5>
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      name="status"
-                      checked={formData.status}
-                      onChange={handleChange}
-                      id="activeSwitch"
-                    />
-                    <label className="form-check-label" htmlFor="activeSwitch">
-                      {formData.status ? "Active" : "Inactive"}
-                    </label>
-                  </div>
-                </div>
-              </div>
+          {errors.product_name && (
+            <div className="alert alert-danger mt-2">
+              {errors.product_name[0]}
             </div>
-
-            {/* Image Upload */}
-            <div className="card mb-3">
-              <div className="card-header">
-                <h4 className="card-title">
-                  Add Category Banner Photo
-                  <span className="text-danger">
-                    ({id ? "Optional" : "Required"})
-                  </span>
-                </h4>
-              </div>
-              <div className="card-body">
-                <input
-                  type="file"
-                  className="form-control"
-                  name="category_image"
-                  onChange={handleChange}
-                  accept="image/*"
-                />
-                {errors.category_image && (
-                  <div className="alert alert-danger mt-2">
-                    {errors.category_image[0]}
-                  </div>
-                )}
-
-                {id && existingImage && (
-                  <div className="mt-3">
-                    
-                    <img
-                      src={`${imgUrl}/category/${existingImage}`}
-                      alt="Existing Category"
-                      className="img-thumbnail"
-                      width="150"
-                    />
-                  </div>
-                )}
-              </div>
+          )}
+        </div>
+        <div className="col-4">
+          <label>Slug</label>
+          <input
+            name="product_slug"
+            value={formData.product_slug}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+          {errors.product_slug && (
+            <div className="alert alert-danger mt-2">
+              {errors.product_slug[0]}
             </div>
-
-            {/* Submit */}
-            <div className="card p-3">
-              <div className="row justify-content-end">
-                <div className="col-lg-2">
-                  <button className="btn btn-primary w-100" type="submit">
-                    {id ? "Update Category" : "Create Category"}
-                  </button>
-                </div>
-              </div>
+          )}
+        </div>
+        <div className="col-4">
+          <label>Category</label>
+          <select
+            name="category_id"
+            value={formData.category_id}
+            onChange={handleChange}
+            // required
+            className="form-control"
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.category_name}
+              </option>
+            ))}
+          </select>
+          {errors.category_id && (
+            <div className="alert alert-danger mt-2">
+              {errors.category_id[0]}
             </div>
-          </form>
+          )}
+        </div>
+        <div className="col-6 mt-3">
+          <label>Product Image 1</label>
+          <input
+            type="file"
+            name="img1"
+            onChange={handleFileChange}
+            // required
+            className="form-control"
+          />
+          {errors.category_id && (
+            <div className="alert alert-danger mt-2">
+              {errors.category_id[0]}
+            </div>
+          )}
+        </div>
+        <div className="col-6 mt-3">
+          <label>Product Image 2</label>
+          <input
+            type="file"
+            name="img2"
+            onChange={handleFileChange}
+            // required
+            className="form-control"
+          />
+          {errors.category_id && (
+            <div className="alert alert-danger mt-2">
+              {errors.category_id[0]}
+            </div>
+          )}
         </div>
       </div>
-    </div>
+      <div className="mb-3 mt-4">
+        <label>Description</label>
+        <ReactQuill
+          theme="snow"
+          value={formData.description}
+          onChange={handleDescriptionChange}
+        />
+      </div>
+      <h5 className="mt-4">Price Matrix</h5>
+      {priceRows.map((row, index) => (
+        <div className="row mb-4 border p-3" key={index}>
+          <div className="col-3">
+            <label>Size</label>
+            <input
+              name="size"
+              value={row.size}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            />
+          </div>
+          <div className="col-3">
+            <label>Size Type</label>
+            <select
+              name="size_type"
+              value={row.size_type}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            >
+              {sizes.map((s) => (
+                <option key={s.id} value={s.value}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-3">
+            <label>Weight</label>
+            <input
+              name="weight"
+              value={row.weight}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            />
+          </div>
+          <div className="col-3">
+            <label>Weight Type</label>
+            <select
+              name="weight_type"
+              value={row.weight_type}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            >
+              {weights.map((w) => (
+                <option key={w.id} value={w.value}>
+                  {w.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-3 mt-2">
+            <label>MRP</label>
+            <input
+              name="mrp_price"
+              type="number"
+              value={row.mrp_price}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-2">
+            <label>Discount %</label>
+            <input
+              name="discount"
+              type="number"
+              value={row.discount}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-2">
+            <label>Selling Price</label>
+            <input
+              name="selling_price"
+              type="number"
+              value={row.selling_price}
+              readOnly
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-2">
+            <label>Tax Value</label>
+            <input
+              name="tax_in_value"
+              type="number"
+              value={row.tax_in_value}
+              onChange={(e) => handleRowChange(index, e)}
+              required
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-2">
+            <label>Net Price</label>
+            <input
+              name="net_price"
+              type="number"
+              value={row.net_price}
+              readOnly
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-2">
+            <label>Product Code</label>
+            <input
+              name="productcode"
+              type="text"
+              value={row.productcode}
+              onChange={(e) => handleRowChange(index, e)}
+              //   required
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-2">
+            <label>Variation Images</label>
+            <input
+              type="file"
+              multiple
+              onChange={(e) => handleRowImageChange(index, e)}
+              className="form-control"
+            />
+          </div>
+          <div className="col-3 mt-4">
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removePriceRow(index)}
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="btn btn-secondary mt-3"
+        onClick={addPriceRow}
+      >
+        + Add Price Row
+      </button>
+      <button type="submit" className="btn btn-primary mt-3 ms-3">
+        Submit Product
+      </button>
+    </form>
   );
 };
 
-export default function AddProductComponents;
+export default AddProductComponent;
