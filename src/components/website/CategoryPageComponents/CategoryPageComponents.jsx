@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductSideMenuPageComponents from "../ProductPageComponents/ProductSideMenuPageComponents";
+import { CartContext } from "../../../context/CartContext";
 
 const CategoryPageComponents = ({ category_id, category_slug }) => {
   const [products, setProducts] = useState([]);
+  const { addToCart } = useContext(CartContext);
+
   const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
   const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
 
@@ -20,6 +23,24 @@ const CategoryPageComponents = ({ category_id, category_slug }) => {
         });
     }
   }, [category_id]);
+
+  const handleAddToCart = (product, attr) => {
+    const cartPayload = {
+      id: product.id,
+      attr_id: attr.id,
+      name: product.product_name,
+      slug: product.product_slug,
+      image: product.product_image1,
+      size: attr.size,
+      size_type: attr.size_type,
+      weight: attr.weight,
+      weight_type: attr.weight_type,
+      price: attr.selling_price,
+      hsncode: attr.hsncode,
+    };
+
+    addToCart(cartPayload, 1);
+  };
 
   return (
     <section className="content-inner-6">
@@ -40,7 +61,7 @@ const CategoryPageComponents = ({ category_id, category_slug }) => {
                           />
                         </Link>
                         <div className="shop-meta">
-                          <Link
+                          {/* <Link
                             className="btn btn-secondary btn-md btn-rounded"
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
@@ -49,7 +70,22 @@ const CategoryPageComponents = ({ category_id, category_slug }) => {
                             <span className="d-md-block d-none">
                               Add to cart
                             </span>
+                          </Link> */}
+
+                          <Link
+                            className="btn btn-secondary btn-md btn-rounded"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const attr = product.product_attrs?.[0];
+                              handleAddToCart(product, attr);
+                            }}
+                          >
+                             <i className="fa-solid fa-eye d-md-none d-block"></i>
+                             <span className="d-md-block d-none">
+                              Add to cart
+                            </span>
                           </Link>
+
                           <div className="btn btn-primary meta-icon dz-wishicon">
                             <i className="icon feather icon-heart dz-heart"></i>
                             <i className="icon feather icon-heart-on dz-heart-fill"></i>
@@ -87,7 +123,7 @@ const CategoryPageComponents = ({ category_id, category_slug }) => {
                           </Link>
                         </h5>
                         <span className="price">
-                          <span className="old">
+                          <span className="old">₹
                             {Math.floor(
                               parseFloat(product.product_attrs[0].mrp_price)
                             )}
@@ -95,7 +131,7 @@ const CategoryPageComponents = ({ category_id, category_slug }) => {
                           <span className="new">
                             ₹
                             {Math.floor(
-                              parseFloat(product.product_attrs[0].net_price)
+                              parseFloat(product.product_attrs[0].selling_price)
                             )}
                           </span>
                         </span>

@@ -132,7 +132,7 @@ const ProductDetailsComponents = ({ productData }) => {
                   <div className="meta-content m-b20">
                     <span className="price-name">INR</span>
                     <span className="price2">
-                      ₹ {selectedAttr?.net_price}
+                      ₹ {selectedAttr?.selling_price}
                       <del>₹ {selectedAttr?.mrp_price}</del>
                     </span>
                   </div>

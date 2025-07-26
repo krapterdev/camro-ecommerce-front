@@ -2,6 +2,60 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function WebsiteLoginPage() {
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  //   remember: true,
+  // });
+
+  // const [showPassword, setShowPassword] = useState(false);
+  // const [loginMsg, setLoginMsg] = useState("");
+  // const [errors, setErrors] = useState({});
+  // const navigate = useNavigate();
+
+  // const handleChange = (e) => {
+  //   const { name, value, type, checked } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: type === "checkbox" ? checked : value,
+  //   }));
+  // };
+
+  // const handleLogin = async () => {
+  //   try {
+  //     setErrors({});
+  //     setLoginMsg("Logging in...");
+
+  //     const res = await fetch("http://127.0.0.1:8000/api/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: formData.email,
+  //         password: formData.password,
+  //       }),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (res.status === 200) {
+  //         localStorage.setItem("auth_user", JSON.stringify(data.user));
+  //         localStorage.setItem("auth_token", data.token);
+  //       setLoginMsg("✅ " + data.message);
+  //       setTimeout(() => navigate("/order"), 1000);
+  //     } else if (res.status === 400) {
+  //       setErrors(data.errors);
+  //       setLoginMsg("Please fix the validation errors.");
+  //     } else {
+  //       setLoginMsg("❌ " + (data.message || "Login failed"));
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     setLoginMsg("Something went wrong.");
+  //   }
+  // };
+  
   return (
     <>
       <section class="px-3">
@@ -15,7 +69,7 @@ function WebsiteLoginPage() {
               >
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <Link href="/"> Home</Link>
+                    <Link to="/"> Home</Link>
                   </li>
                   <li class="breadcrumb-item">Login</li>
                 </ul>
@@ -73,24 +127,24 @@ function WebsiteLoginPage() {
                     </div>
                   </div>
                   <div class="form-group">
-                    <a class="text-primary" href="forget-password.html">
+                    <Link class="text-primary" to="forget-password.html">
                       Forgot Password
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div class="text-center">
-                  <a
-                    href="account-dashboard.html"
+                  <Link
+                    to="/user-dashboard"
                     class="btn btn-secondary btnhover text-uppercase me-2 sign-btn"
                   >
                     Sign In
-                  </a>
-                  <a
-                    href="registration.html"
+                  </Link>
+                  <Link
+                    to="/register"
                     class="btn btn-outline-secondary btnhover text-uppercase"
                   >
                     Register
-                  </a>
+                  </Link>
                 </div>
               </form>
             </div>

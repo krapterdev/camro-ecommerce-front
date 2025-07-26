@@ -9,6 +9,7 @@ import Checkout from "./pages/website/Checkout";
 import AddProductSize from "./pages/admin/AddProductSize";
 import ListProductSize from "./pages/admin/ListProductSize";
 import ViewCart from "./pages/website/ViewCart";
+import RegisterPage from "./pages/website/RegisterPage";
 
 // 🐢 Lazy load website pages
 const Home = lazy(() => import("./pages/website/Home"));
@@ -58,7 +59,10 @@ function App() {
           <Route path="/:category/:productDetail" element={<ProductDetailPage />} />
           {/* <Route path="/:category/:slug" element={<ProductDetailPage />} /> */}
           <Route path="/login" element={<LogIn />} />
-          <Route path="/register" element={<LogIn />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forget/:token" element={<LogIn />} />
+          <Route path="/verify-user/:token" element={<LogIn />} />
+          <Route path="/user-dashboard" element={<LogIn />} />
           <Route path="/orders" element={<LogIn />} />
           <Route path="/shopping-cart" element={<ShoppingCart />} />
         </Route>
