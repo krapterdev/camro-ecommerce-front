@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductQtyInput from '../ProductQtyInput'
+import { Link } from 'react-router-dom'
 
 const WebsiteViewCartComponent = () => {
   return (
@@ -40,10 +41,10 @@ const WebsiteViewCartComponent = () => {
                       </td>
                       <td className="product-item-totle">₹160.00</td>
                       <td className="product-item-close">
-                        <a href="javascript:void(0);">
+                        <Link href="javascript:void(0);">
                           {" "}
                           <div className="ti-close">x</div>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                     <tr>
@@ -64,10 +65,10 @@ const WebsiteViewCartComponent = () => {
                       </td>
                       <td className="product-item-totle">₹120.00</td>
                       <td className="product-item-close">
-                        <a href="javascript:void(0);">
+                        <Link href="javascript:void(0);">
                           {" "}
                           <div className="ti-close">x</div>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                     <tr>
@@ -88,10 +89,10 @@ const WebsiteViewCartComponent = () => {
                       </td>
                       <td className="product-item-totle">₹40.00</td>
                       <td className="product-item-close">
-                        <a href="javascript:void(0);">
+                        <Link href="javascript:void(0);">
                           {" "}
                           <div className="ti-close">x</div>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                     <tr>
@@ -112,10 +113,10 @@ const WebsiteViewCartComponent = () => {
                       </td>
                       <td className="product-item-totle">₹160.00</td>
                       <td className="product-item-close">
-                        <a href="javascript:void(0);">
+                        <Link href="javascript:void(0);">
                           {" "}
                           <div className="ti-close">x</div>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                   </tbody>
@@ -146,21 +147,21 @@ const WebsiteViewCartComponent = () => {
                   </div>
                 </div>
                 <div className="col-md-6 text-end">
-                  <a href="shop-cart.html" className="btn btn-secondary">
+                  <Link href="" className="btn btn-secondary">
                     UPDATE CART
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
             <div className="col-lg-4">
               <h4 className="title mb15">Cart Total</h4>
               <div className="cart-detail">
-                <a
+                <Link
                   href="javascript:void(0);"
                   className="btn btn-outline-secondary w-100 m-b20"
                 >
                   Bank Offer 5% Cashback
-                </a>
+                </Link>
                 <div className="icon-bx-wraper style-4 m-b15">
                   <div className="icon-bx">
                     <i className="flaticon flaticon-ship"></i>
@@ -201,9 +202,9 @@ const WebsiteViewCartComponent = () => {
                     </tr>
                   </tbody>
                 </table>
-                <a href="/checkout" className="btn btn-secondary w-100">
+                <Link href="/checkout" className="btn btn-secondary w-100">
                   PLACE ORDER
-                </a>
+                </Link>
               </div>
             </div>
           </div>

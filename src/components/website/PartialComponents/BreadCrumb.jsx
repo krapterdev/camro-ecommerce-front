@@ -15,7 +15,7 @@ function BreadCrumb({ title, items }) {
                   {items.map((item, index) => (
                     <li key={index} className="breadcrumb-item">
                       {item.href ? (
-                        <a href={item.href}>{item.label}</a>
+                        <Link href={item.href}>{item.label}</Link>
                       ) : (
                         item.label
                       )}

@@ -115,7 +115,7 @@ function WebsiteLoginPage() {
                 </div>
                 <div class="form-row d-flex justify-content-between m-b30">
                   <div class="form-group">
-                    <div class="custom-control custom-checkbox">
+                    {/* <div class="custom-control custom-checkbox">
                       <input
                         type="checkbox"
                         class="form-check-input"
@@ -124,7 +124,7 @@ function WebsiteLoginPage() {
                       <label class="form-check-label" for="basic_checkbox_1">
                         Remember Me
                       </label>
-                    </div>
+                    </div> */}
                   </div>
                   <div class="form-group">
                     <Link class="text-primary" to="forget-password.html">

@@ -149,7 +149,7 @@ function ProductSideMenuPageComponents() {
                 <div className="collapse" id="collapseExample3">
                   <div className="card card-body">
                     <div className="widget widget_categories">
-                      <ul>nc
+                      <ul>
                         <li className="cat-item cat-item-26">
                           <a href="#">₹2,000.00 - ₹3,000.00 </a>
                           <input type="checkbox" />

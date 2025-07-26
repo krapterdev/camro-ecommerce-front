@@ -18,7 +18,7 @@ function ProductRelateProductComponents() {
               <h2 className="title mb-0">Related products</h2>
             </div>
             <a
-              href="#"mn
+              href="#"
               className="text-secondary font-14 d-flex align-items-center gap-1"
             >
               See all products

@@ -128,7 +128,6 @@ const ProductDetailsComponents = ({ productData }) => {
                     }}
                   />
 
-                  {/* {productData.product_desc} */}
                   <div className="meta-content m-b20">
                     <span className="price-name">INR</span>
                     <span className="price2">

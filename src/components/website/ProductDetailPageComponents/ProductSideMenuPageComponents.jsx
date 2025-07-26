@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ProductSideMenuPageComponents() {
   return (
     <>
       <div className="col-20 col-xl-3">
         <div className="sticky-xl-top">
-          <a href="" className="panel-close-btn">
+          <Link href="" className="panel-close-btn">
             <svg
               width="35"
               height="35"
@@ -28,7 +29,7 @@ function ProductSideMenuPageComponents() {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </Link>
           <div className="shop-filter mt-xl-2 mt-0">
             <aside>
               <div className="widget widget_search">
@@ -77,15 +78,15 @@ function ProductSideMenuPageComponents() {
                     <div className="widget widget_categories">
                       <ul>
                         <li className="cat-item cat-item-26">
-                          <a href="#">Pressure Cooker</a>
+                          <Link href="#">Pressure Cooker</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">Cookware</a>
+                          <Link href="#">Cookware</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">Accessories</a>
+                          <Link href="#">Accessories</Link>
                           <input type="checkbox" />
                         </li>
                       </ul>
@@ -116,11 +117,11 @@ function ProductSideMenuPageComponents() {
                     <div className="widget widget_categories">
                       <ul>
                         <li className="cat-item cat-item-26">
-                          <a href="#">Inner Lid</a>
+                          <Link href="#">Inner Lid</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">Outer Lid </a>
+                          <Link href="#">Outer Lid </Link>
                           <input type="checkbox" />
                         </li>
                       </ul>
@@ -151,19 +152,19 @@ function ProductSideMenuPageComponents() {
                     <div className="widget widget_categories">
                       <ul>
                         <li className="cat-item cat-item-26">
-                          <a href="#">₹2,000.00 - ₹3,000.00 </a>
+                          <Link href="#">₹2,000.00 - ₹3,000.00 </Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">₹3,000.00 - ₹4,000.00 </a>
+                          <Link href="#">₹3,000.00 - ₹4,000.00 </Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">₹4,000.00 - ₹5,000.00 </a>
+                          <Link href="#">₹4,000.00 - ₹5,000.00 </Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">₹6,000.00 - ₹7,000.00 </a>
+                          <Link href="#">₹6,000.00 - ₹7,000.00 </Link>
                           <input type="checkbox" />
                         </li>
                       </ul>
@@ -279,42 +280,42 @@ function ProductSideMenuPageComponents() {
                     <div className="widget widget_categories">
                       <ul>
                         <li className="cat-item cat-item-26 active">
-                          <a href="#">Triply Artisian</a>
+                          <Link href="#">Triply Artisian</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">Triply Artisian Golden</a>
+                          <Link href="#">Triply Artisian Golden</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-43">
-                          <a href="#">Triply Hammered</a>
+                          <Link href="#">Triply Hammered</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-27">
-                          <a href="#">Triply Honeycomb</a>
+                          <Link href="#">Triply Honeycomb</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-40">
-                          <a href="#">Brass</a> <input type="checkbox" />
+                          <Link href="#">Brass</Link> <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-40">
-                          <a href="#">Hotpot / Casserole</a>
+                          <Link href="#">Hotpot / Casserole</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-40">
-                          <a href="#">Steller Encapsulated</a>
+                          <Link href="#">Steller Encapsulated</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-43">
-                          <a href="#">Mapple Flat Bottom</a>
+                          <Link href="#">Mapple Flat Bottom</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">Cast Iron</a>
+                          <Link href="#">Cast Iron</Link>
                           <input type="checkbox" />
                         </li>
                         <li className="cat-item cat-item-36">
-                          <a href="#">Accessaries</a>
+                          <Link href="#">Accessaries</Link>
                           <input type="checkbox" />
                         </li>
                       </ul>

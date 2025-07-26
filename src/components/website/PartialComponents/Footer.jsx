@@ -65,41 +65,41 @@ const Footer = () => {
                   </div>
                   <ul className="nav-inline">
                     <li>
-                      <a
+                      <Link
                         href="https://www.facebook.com/CamroSteels/"
                         target="_blank"
                         className="site-button-link facebook hover"
                       >
                         <i className="fab fa-facebook-f"></i>
-                      </a>
+                      </Link>
                     </li>
 
                     <li>
-                      <a
+                      <Link
                         href="https://www.linkedin.com/company/camro-steels"
                         target="_blank"
                         className="site-button-link linkedin hover"
                       >
                         <i className="fab fa-linkedin-in"></i>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href="https://www.instagram.com/triplycookware/"
                         target="_blank"
                         className="site-button-link instagram hover"
                       >
                         <i className="fab fa-instagram"></i>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href="https://x.com/CamroSteels"
                         target="_blank"
                         className="site-button-link twitter hover"
                       >
                         <i className="fab fa-twitter"></i>
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

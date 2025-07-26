@@ -251,7 +251,7 @@ const Header = () => {
                   </li> */}
 
                   <li className="has-mega-menu sub-menu-down wide-width">
-                    <Link to="#">
+                    <Link>
                       <span>Shop Now</span>
                       <i className="fas fa-chevron-down tabIndex"></i>
                     </Link>
