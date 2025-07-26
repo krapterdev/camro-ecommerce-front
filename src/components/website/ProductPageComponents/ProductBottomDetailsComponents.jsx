@@ -51,7 +51,7 @@ const ProductBottomDetailsComponents = ({ productData }) => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6">
-              <div className="fixed-shop-card">
+              <div className="fixed-shop-card">,mv
                 <img
                   src={`${imgUrl}/product/${productData.product_image1}`}
                   alt={productData.product_name}

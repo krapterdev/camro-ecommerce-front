@@ -12,7 +12,7 @@ function ProductDetailPageComponents({ productData }) {
 
       <ProductBottomDetailsComponents productData={productData} />
     </>
-  );
+  );j,hh
 }
 
 
