@@ -4,10 +4,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
 import axios from "axios";
 import CartBoxComponent from "../CartBoxComponent";
+import { AuthContext } from "../../../context/AuthContext";
 
 const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
 
 const Header = () => {
+  const { user, logout, loading } = useContext(AuthContext);
+
   const [isFixed, setIsFixed] = useState(false);
   const { getCartCount } = useContext(CartContext);
   useEffect(() => {
@@ -54,6 +57,10 @@ const Header = () => {
   }, []);
 
   // ----------------------------------------------------
+
+  const handleLogout = () => {
+    logout();
+  };
 
   // const navigate = useNavigate();
   // const user = JSON.parse(localStorage.getItem("auth_user"));
@@ -348,10 +355,47 @@ const Header = () => {
                 <div className="extra-cell">
                   <ul className="header-right">
                     <li className="nav-item login-link">
-                      <Link className="nav-link" to="/login">
-                        Login / Register
-                      </Link>
+                      {/* {user ? (
+                        <span className="nav-link" onClick={handleLogout}>
+                          Logout
+                        </span>
+                      ) : (
+                        <Link className="nav-link" to="/login">
+                          Login / Register
+                        </Link>
+                      )} */}
+                      {loading ? (
+                        <div
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          <div
+                            className="spinner-border text-secondary"
+                            role="status"
+                          >
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      ) : user ? (
+                        <Link className="nav-link" onClick={logout}>
+                          Logout
+                        </Link>
+                      ) : (
+                        <Link className="nav-link" to="/login">
+                          Login / Register
+                        </Link>
+                      )}
+
+                      {/* {user ? (
+                        <Link className="nav-link" onClick={logout}>
+                          Logout
+                        </Link>
+                      ) : (
+                        <Link className="nav-link" to="/login">
+                          Login / Register
+                        </Link>
+                      )} */}
                     </li>
+
                     <li className="nav-item search-link">
                       <Link
                         className="nav-link"

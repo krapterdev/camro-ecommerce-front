@@ -8,6 +8,7 @@ import { SizeProvider } from "./context/SizeContext";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { WishlistProvider } from "./context/WishlistContext";
+import { AuthProvider } from "./context/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -28,9 +29,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <SizeProvider>
       <QuantityProvider>
         <WishlistProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
+          <CartProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </CartProvider>
         </WishlistProvider>
       </QuantityProvider>
     </SizeProvider>

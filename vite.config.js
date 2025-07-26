@@ -32,4 +32,7 @@ export default defineConfig({
     global: {},
     "process.env": {},
   },
+  server: {
+    host: "0.0.0.0",
+  },
 });

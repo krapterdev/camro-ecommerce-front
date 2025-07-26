@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function BreadCrumb({ title, items }) {
   return (
@@ -15,7 +16,7 @@ function BreadCrumb({ title, items }) {
                   {items.map((item, index) => (
                     <li key={index} className="breadcrumb-item">
                       {item.href ? (
-                        <Link href={item.href}>{item.label}</Link>
+                        <Link to={item.href}>{item.label}</Link>
                       ) : (
                         item.label
                       )}
