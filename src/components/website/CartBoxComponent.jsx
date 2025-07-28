@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useContext, useMemo } from "react";
 import ProductQtyInput from "./ProductQtyInput";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import WishlistBoxComponent from "./WishlistBoxComponent";
 
 const CartBoxComponent = () => {
-  const { cartItems, removeFromCart, getCartCount } = useContext(CartContext);
+  const { cartItems, removeFromCart, getCartCount ,totalCartitems } = useContext(CartContext);
 
-  const cartSubtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-  const dummyRemoveFromCart = (productId) => {
-    const updated = cartItems.filter((item) => item.id !== productId);
-    setCartItems(updated);
-  };
+  // Subtotal calculation using qty * price
+  const subtotal = useMemo(() => {
+    return cartItems.reduce((total, item) => {
+      return total + item.price * item.qty;
+    }, 0);
+  }, [cartItems]);
 
   return (
     <>
@@ -48,7 +45,7 @@ const CartBoxComponent = () => {
                     aria-selected="true"
                   >
                     Shopping Cart
-                    <span className="badge badge-light">{getCartCount()}</span>
+                    <span className="badge badge-light">{totalCartitems()}</span>
                   </button>
                 </li>
 
@@ -98,10 +95,10 @@ const CartBoxComponent = () => {
                                 </h6>
                                 <div className="d-flex align-items-center">
                                   <div className="btn-quantity light quantity-sm me-3">
-                                    <ProductQtyInput attr_id={item.attr_id} />
+                                    <ProductQtyInput product={item} />
                                   </div>
                                   <h6 className="dz-price mb-0">
-                                    ₹{item.price}
+                                    ₹{item.price * item.qty}
                                   </h6>
                                 </div>
                               </div>
@@ -123,7 +120,7 @@ const CartBoxComponent = () => {
                     </ul>
                     <div className="cart-total">
                       <h5 className="mb-0">Subtotal:</h5>
-                      <h5 className="mb-0">₹{cartSubtotal.toFixed(2)}</h5>
+                      <h5 className="mb-0">₹{subtotal}</h5>
                     </div>
 
                     <div className="mt-auto">

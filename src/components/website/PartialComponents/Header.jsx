@@ -12,7 +12,7 @@ const Header = () => {
   const { user, logout, loading } = useContext(AuthContext);
 
   const [isFixed, setIsFixed] = useState(false);
-  const { getCartCount } = useContext(CartContext);
+  const { totalCartitems } = useContext(CartContext);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -427,9 +427,9 @@ const Header = () => {
                         aria-controls="offcanvasRight"
                       >
                         <i className="iconly-Broken-Buy"></i>
-                        {getCartCount() > 0 && (
+                        {totalCartitems() > 0 && (
                           <span className="badge badge-circle">
-                            {getCartCount()}
+                            {totalCartitems()}
                           </span>
                         )}
                       </Link>

@@ -15,23 +15,23 @@ function WebsiteLoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      await login(email, password);
-      // console.log("cartItems", cartItems);
-      const token = localStorage.getItem("authToken");
+    // try {
+    await login(email, password);
+    // console.log("cartItems", cartItems);
+    const token = localStorage.getItem("authToken");
 
-      if (cartItems) {
-        await axios.post(`${webURL}/add-cart`, cartItems);
-      }
-
-      localStorage.removeItem("guestCart");
-
-      setTimeout(() => {
-        navigate(getCartCount() > 0 ? "/viewcart" : "/");
-      }, 1000);
-    } catch (err) {
-      alert("Invalid login");
+    if (cartItems) {
+      await axios.post(`${webURL}/add-cart`, cartItems);
     }
+
+    localStorage.removeItem("guestCart");
+
+    setTimeout(() => {
+      navigate(getCartCount() > 0 ? "/viewcart" : "/");
+    }, 1000);
+    // } catch (err) {
+    //   alert("Invalid login");
+    // }
   };
 
   return (

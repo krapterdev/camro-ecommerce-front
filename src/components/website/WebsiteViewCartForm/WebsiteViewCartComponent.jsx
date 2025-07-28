@@ -7,7 +7,7 @@ const WebsiteViewCartComponent = () => {
   const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
   const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
 
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, removeFromCart } = useContext(CartContext);
   return (
     <>
       <section className="content-inner shop-account">
@@ -31,23 +31,28 @@ const WebsiteViewCartComponent = () => {
                       <tr key={index}>
                         <td className="product-item-img">
                           <img
-                          src={`${imgUrl}/product/${item.image}`}
+                            src={`${imgUrl}/product/${item.image}`}
                             alt="/"
                           />
                         </td>
-                        <td className="product-item-name">
-                         {item.name}
-                        </td>
+                        <td className="product-item-name">{item.name}</td>
                         <td className="product-item-price">₹40.00</td>
                         <td className="product-item-quantity">
                           <div className="quantity btn-quantity style-1 me-3">
-                            <ProductQtyInput attr_id={1000} />
+                            <ProductQtyInput attr_id={item.attr_id} />{" "}
                           </div>
                         </td>
-                        <td className="product-item-totle">₹160.00</td>
+                        <td className="product-item-totle">₹{item.price}</td>
                         <td className="product-item-close">
                           <Link href="javascript:void(0);">
-                            <div className="ti-close">x</div>
+                            <div
+                              className="ti-close"
+                              onClick={() =>
+                                removeFromCart(item.id, item.attr_id)
+                              }
+                            >
+                              x
+                            </div>
                           </Link>
                         </td>
                       </tr>
