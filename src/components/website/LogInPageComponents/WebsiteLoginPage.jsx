@@ -17,7 +17,7 @@ function WebsiteLoginPage() {
     e.preventDefault();
     try {
       await login(email, password);
-      console.log("cartItems", cartItems);
+      // console.log("cartItems", cartItems);
       const token = localStorage.getItem("authToken");
 
       if (cartItems) {
