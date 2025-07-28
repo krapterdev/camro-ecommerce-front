@@ -1,11 +1,15 @@
-import React from 'react'
-import ProductQtyInput from '../ProductQtyInput'
-import { Link } from 'react-router-dom'
+import React, { useContext } from "react";
+import ProductQtyInput from "../ProductQtyInput";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../../context/CartContext";
 
 const WebsiteViewCartComponent = () => {
+  const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
+  const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
+
+  const { cartItems } = useContext(CartContext);
   return (
     <>
-    
       <section className="content-inner shop-account">
         <div className="container">
           <div className="row">
@@ -23,102 +27,31 @@ const WebsiteViewCartComponent = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="product-item-img">
-                        <img
-                          src="/src/assets/website/images/triply-artisian-cookware/2.png"
-                          alt="/"
-                        />
-                      </td>
-                      <td className="product-item-name">
-                        Triply Steller Inner Lid Pressure Cooker 1.5 L
-                      </td>
-                      <td className="product-item-price">₹40.00</td>
-                      <td className="product-item-quantity">
-                        <div className="quantity btn-quantity style-1 me-3">
-                          <ProductQtyInput attr_id={1000} />
-                        </div>
-                      </td>
-                      <td className="product-item-totle">₹160.00</td>
-                      <td className="product-item-close">
-                        <Link href="javascript:void(0);">
-                          {" "}
-                          <div className="ti-close">x</div>
-                        </Link>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="product-item-img">
-                        <img
-                          src="/src/assets/website/images/triply-artisian-cookware/1.png"
-                          alt="/"
-                        />
-                      </td>
-                      <td className="product-item-name">
-                        Triply Steller Inner Lid Pressure Cooker 1.5 L
-                      </td>
-                      <td className="product-item-price">₹56.00</td>
-                      <td className="product-item-quantity">
-                        <div className="quantity btn-quantity style-1 me-3">
-                          <ProductQtyInput attr_id={1000} />
-                        </div>
-                      </td>
-                      <td className="product-item-totle">₹120.00</td>
-                      <td className="product-item-close">
-                        <Link href="javascript:void(0);">
-                          {" "}
-                          <div className="ti-close">x</div>
-                        </Link>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="product-item-img">
-                        <img
-                          src="/src/assets/website/images/triply-artisian-cookware/3.png"
-                          alt="/"
-                        />
-                      </td>
-                      <td className="product-item-name">
-                        Triply Steller Inner Lid Pressure Cooker 3.5 L
-                      </td>
-                      <td className="product-item-price">₹30.00</td>
-                      <td className="product-item-quantity">
-                        <div className="quantity btn-quantity style-1 me-3">
-                          <ProductQtyInput attr_id={1000} />
-                        </div>
-                      </td>
-                      <td className="product-item-totle">₹40.00</td>
-                      <td className="product-item-close">
-                        <Link href="javascript:void(0);">
-                          {" "}
-                          <div className="ti-close">x</div>
-                        </Link>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="product-item-img">
-                        <img
-                          src="/src/assets/website/images/triply-artisian-cookware/1.png"
-                          alt="/"
-                        />
-                      </td>
-                      <td className="product-item-name">
-                        Triply Steller Inner Lid Pressure Cooker 1.5 L
-                      </td>
-                      <td className="product-item-price">₹42.00</td>
-                      <td className="product-item-quantity">
-                        <div className="quantity btn-quantity style-1 me-3">
-                          <ProductQtyInput attr_id={1000} />
-                        </div>
-                      </td>
-                      <td className="product-item-totle">₹160.00</td>
-                      <td className="product-item-close">
-                        <Link href="javascript:void(0);">
-                          {" "}
-                          <div className="ti-close">x</div>
-                        </Link>
-                      </td>
-                    </tr>
+                    {cartItems.map((item, index) => (
+                      <tr key={index}>
+                        <td className="product-item-img">
+                          <img
+                          src={`${imgUrl}/product/${item.image}`}
+                            alt="/"
+                          />
+                        </td>
+                        <td className="product-item-name">
+                         {item.name}
+                        </td>
+                        <td className="product-item-price">₹40.00</td>
+                        <td className="product-item-quantity">
+                          <div className="quantity btn-quantity style-1 me-3">
+                            <ProductQtyInput attr_id={1000} />
+                          </div>
+                        </td>
+                        <td className="product-item-totle">₹160.00</td>
+                        <td className="product-item-close">
+                          <Link href="javascript:void(0);">
+                            <div className="ti-close">x</div>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -211,7 +144,7 @@ const WebsiteViewCartComponent = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default WebsiteViewCartComponent
+export default WebsiteViewCartComponent;

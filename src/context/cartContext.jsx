@@ -53,9 +53,27 @@ export const CartProvider = ({ children }) => {
     return cartItems.length;
   };
 
+  const getShipping = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const getCartSubtotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
+
+  const getCartTotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, isInCart, getCartCount }}
+      value={{ cartItems, addToCart, removeFromCart, isInCart, getCartCount ,getShipping, getCartSubtotal, getCartTotal}}
     >
       {children}
     </CartContext.Provider>

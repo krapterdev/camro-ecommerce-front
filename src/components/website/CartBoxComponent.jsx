@@ -106,14 +106,14 @@ const CartBoxComponent = () => {
                                 </div>
                               </div>
 
-                              <button
+                              <Link
                                 className="dz-close"
                                 onClick={() =>
                                   removeFromCart(item.id, item.attr_id)
                                 }
                               >
                                 <i className="ti-close">x</i>
-                              </button>
+                              </Link>
                             </div>
                           </li>
                         ))
