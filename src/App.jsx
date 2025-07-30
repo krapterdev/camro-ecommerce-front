@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import WebsiteLayout from "./layouts/WebsiteLayout";
 import AdminLayout from "./layouts/AdminLayout";
 
+import Email from "./pages/website/Email";
 import Checkout from "./pages/website/Checkout";
 import AddProductSize from "./pages/admin/AddProductSize";
 import ListProductSize from "./pages/admin/ListProductSize";
@@ -13,7 +14,7 @@ import RegisterPage from "./pages/website/RegisterPage";
 
 // 🐢 Lazy load website pages
 const Home = lazy(() => import("./pages/website/Home"));
-const Email = lazy(() => import("./pages/website/Email  "));
+// const Email = lazy(() => import("./pages/website/Email  "));
 const About = lazy(() => import("./pages/website/About"));
 const WhyChooseUs = lazy(() => import("./pages/website/WhyChooseUs"));
 const ContactUs = lazy(() => import("./pages/website/ContactUs"));
