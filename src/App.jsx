@@ -13,6 +13,7 @@ import RegisterPage from "./pages/website/RegisterPage";
 
 // 🐢 Lazy load website pages
 const Home = lazy(() => import("./pages/website/Home"));
+const Email = lazy(() => import("./pages/website/Email  "));
 const About = lazy(() => import("./pages/website/About"));
 const WhyChooseUs = lazy(() => import("./pages/website/WhyChooseUs"));
 const ContactUs = lazy(() => import("./pages/website/ContactUs"));
@@ -50,6 +51,7 @@ function App() {
         {/* Website Routes */}
         <Route element={<WebsiteLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/email" element={<Email />} />
           <Route path="/about" element={<About />} />
           <Route path="/why-us" element={<WhyChooseUs />} />
           <Route path="/checkout" element={<Checkout />} />
