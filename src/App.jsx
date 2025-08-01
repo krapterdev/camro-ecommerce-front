@@ -11,6 +11,15 @@ import AddProductSize from "./pages/admin/AddProductSize";
 import ListProductSize from "./pages/admin/ListProductSize";
 import ViewCart from "./pages/website/ViewCart";
 import RegisterPage from "./pages/website/RegisterPage";
+// user dashboard
+import AccountDashboard from "./pages/website/AccountDashboard";
+import AccountOrders from "./pages/website/AccountOrders";
+import AccountAddress from "./pages/website/AccountAddress";
+import AccountOrderDetails from "./pages/website/AccountOrderDetails";
+import AccountCancellationRequests from "./pages/website/AccountCancellationRequests";
+import AccountRefundRequestsConfirmed from "./pages/website/AccountRefundRequestsConfirmed";
+import AccountProfile from "./pages/website/AccountProfile";
+
 
 // 🐢 Lazy load website pages
 const Home = lazy(() => import("./pages/website/Home"));
@@ -65,9 +74,17 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget/:token" element={<LogIn />} />
           <Route path="/verify-user/:token" element={<LogIn />} />
-          <Route path="/user-dashboard" element={<LogIn />} />
+          {/* <Route path="/user-dashboard" element={<LogIn />} /> */}
           <Route path="/orders" element={<LogIn />} />
           <Route path="/shopping-cart" element={<ShoppingCart />} />
+          {/* user dashboard */}
+          <Route path="/user-dashboard" element={<AccountDashboard />} />
+          <Route path="/user-orders" element={<AccountOrders />} />
+          <Route path="/user-address" element={<AccountAddress />} />
+          <Route path="/user-order-details" element={<AccountOrderDetails />} />
+          <Route path="/user-cancellation-requests" element={<AccountCancellationRequests />} />
+          <Route path="/user-refund-requests" element={<AccountRefundRequestsConfirmed />} />
+          <Route path="/user-profile" element={<AccountProfile />} />
         </Route>
 
         {/* Admin Routes */}
