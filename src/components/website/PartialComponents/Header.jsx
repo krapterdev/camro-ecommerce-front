@@ -1,7 +1,7 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import logo from "../../../assets/common/logo.png";
 import React, { useEffect, useState, useContext } from "react";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 import axios from "axios";
 import CartBoxComponent from "../CartBoxComponent";
 import { AuthContext } from "../../../context/AuthContext";
@@ -12,7 +12,8 @@ const Header = () => {
   const { user, logout, loading } = useContext(AuthContext);
 
   const [isFixed, setIsFixed] = useState(false);
-  const { totalCartitems } = useContext(CartContext);
+  const { totalCartItems } = useCart();
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -365,9 +366,7 @@ const Header = () => {
                         </Link>
                       )} */}
                       {loading ? (
-                        <div
-                          className="d-flex justify-content-center align-items-center"
-                        >
+                        <div className="d-flex justify-content-center align-items-center">
                           <div
                             className="spinner-border text-secondary"
                             role="status"
@@ -427,9 +426,9 @@ const Header = () => {
                         aria-controls="offcanvasRight"
                       >
                         <i className="iconly-Broken-Buy"></i>
-                        {totalCartitems() > 0 && (
+                        {totalCartItems() > 0 && (
                           <span className="badge badge-circle">
-                            {totalCartitems()}
+                            {totalCartItems()}
                           </span>
                         )}
                       </Link>

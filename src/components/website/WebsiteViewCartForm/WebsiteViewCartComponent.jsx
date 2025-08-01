@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import ProductQtyInput from "../ProductQtyInput";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const WebsiteViewCartComponent = () => {
   const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
   const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
 
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cartItems, removeFromCart } = useCart();
   return (
     <>
       <section className="content-inner shop-account">

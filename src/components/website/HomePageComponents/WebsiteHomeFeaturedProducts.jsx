@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const WebsiteHomeFeaturedProducts = () => {
   const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
   const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useCart();
 
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
@@ -89,7 +89,7 @@ const WebsiteHomeFeaturedProducts = () => {
                   id="pills-tab"
                   role="tablist"
                 >
-                  {categories.map((cat) => (
+                  {categories.slice(0, 5).map((cat) => (
                     <li className="btn" key={cat.id} role="presentation">
                       <Link
                         className={selectedCatId === cat.id ? "active" : ""}

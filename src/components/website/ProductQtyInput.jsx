@@ -1,51 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useCart } from "../../context/CartContext";
+import React from "react";
 
-const ProductQtyInput = ({ product }) => {
-  const { updateQuantity } = useCart();
-  const [qty, setQty] = useState(product.qty || 1); // Ensure local state
-
-  // Sync with cart context when qty changes
-  useEffect(() => {
-    updateQuantity(product.id, qty);
-  }, [qty]);
-
-  const handleQtyChange = (e) => {
-    const newQty = parseInt(e.target.value);
-    if (!isNaN(newQty) && newQty >= 1) {
-      setQty(newQty);
-    }
-  };
-
-  const handleCount = (type) => {
-    setQty((prevQty) => {
-      if (type === "add") return prevQty + 1;
-      if (type === "minus" && prevQty > 1) return prevQty - 1;
-      return prevQty;
-    });
+const ProductQtyInput = ({ qty, setQty }) => {
+  const handleIncrement = () => setQty((prev) => prev + 1);
+  const handleDecrement = () => {
+    if (qty > 1) setQty((prev) => prev - 1);
   };
 
   return (
     <div className="qty-input">
       <button
-        onClick={() => handleCount("minus")}
-        disabled={qty <= 1}
-        className="qty-count qty-count--minus"
         type="button"
+        onClick={handleDecrement}
+         disabled={qty <= 1}
+        className="qty-count qty-count--minus"
       >
         -
       </button>
       <input
-        className="product-qty"
         type="number"
-        min="1"
+        className="product-qty"
         value={qty}
-        onChange={handleQtyChange}
+        onChange={(e) => setQty(Math.max(1, parseInt(e.target.value) || 1))}
+        min="1"
       />
       <button
-        onClick={() => handleCount("add")}
-        className="qty-count qty-count--add"
         type="button"
+        onClick={handleIncrement}
+        className="qty-count qty-count--add"
+         disabled={qty >= 10}
       >
         +
       </button>

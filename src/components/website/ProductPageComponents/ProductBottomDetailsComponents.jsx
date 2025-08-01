@@ -2,14 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import ProductQtyInput from "../ProductQtyInput";
 import { useSize } from "../../../context/SizeContext";
 import { useQuantity } from "../../../context/QuantityContext";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 import { Link } from "react-router-dom";
 
 const ProductBottomDetailsComponents = ({ productData }) => {
   const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
   const { qty } = useQuantity();
   const { sizeAttrId, setSizeAttrId } = useSize();
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useCart();
 
   const selectedAttr = productData.product_attrs.find(
     (attr) => attr.id === sizeAttrId

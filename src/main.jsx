@@ -9,6 +9,7 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider } from "./context/AuthContext";
+import { ProductProvider } from "./context/ProductContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -30,9 +31,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <QuantityProvider>
         <WishlistProvider>
           <CartProvider>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
+            <ProductProvider>
+              <AuthProvider>
+                <App />
+              </AuthProvider>
+            </ProductProvider>
           </CartProvider>
         </WishlistProvider>
       </QuantityProvider>

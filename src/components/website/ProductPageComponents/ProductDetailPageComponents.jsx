@@ -8,9 +8,9 @@ function ProductDetailPageComponents({ productData }) {
     <>
       <ProductDetailsComponents productData={productData} />
 
-      <ProductDesReviewComponents productData={productData} />
+      {/* <ProductDesReviewComponents productData={productData} /> */}
 
-      <ProductBottomDetailsComponents productData={productData} />
+      {/* <ProductBottomDetailsComponents productData={productData} /> */}
     </>
   );
 }

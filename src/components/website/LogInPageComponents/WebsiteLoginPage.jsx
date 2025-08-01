@@ -3,14 +3,14 @@ import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 function WebsiteLoginPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
-  const { getCartCount, cartItems } = useContext(CartContext);
+  const { getCartCount, cartItems } = useCart();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {

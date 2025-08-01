@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const WebsiteHomeTriplyHammeredCookware = () => {
   const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
@@ -9,7 +9,7 @@ const WebsiteHomeTriplyHammeredCookware = () => {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     axios

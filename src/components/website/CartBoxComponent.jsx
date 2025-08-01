@@ -1,23 +1,25 @@
-import React, { useContext, useMemo } from "react";
-import ProductQtyInput from "./ProductQtyInput";
+import React from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../context/CartContext";
+import { useCart } from "../../context/CartContext";
 import WishlistBoxComponent from "./WishlistBoxComponent";
+import CartProductQtyInput from "./CartProductQtyInput";
 
 const CartBoxComponent = () => {
-  const { cartItems, removeFromCart, getCartCount ,totalCartitems } = useContext(CartContext);
+  const {
+    cartItems,
+    removeFromCart,
+    cartTotal,
+    shippingCharge,
+    grandTotal,
+  } = useCart();
 
-  // Subtotal calculation using qty * price
-  const subtotal = useMemo(() => {
-    return cartItems.reduce((total, item) => {
-      return total + item.price * item.qty;
-    }, 0);
-  }, [cartItems]);
+  const totalCartItems = () =>
+    cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   return (
     <>
       <div
-        className="offcanvas dz-offcanvas offcanvas offcanvas-end"
+        className="offcanvas dz-offcanvas offcanvas-end"
         tabIndex="-1"
         id="offcanvasRight"
       >
@@ -45,10 +47,11 @@ const CartBoxComponent = () => {
                     aria-selected="true"
                   >
                     Shopping Cart
-                    <span className="badge badge-light">{totalCartitems()}</span>
+                    <span className="badge badge-light">
+                      {totalCartItems()}
+                    </span>
                   </button>
                 </li>
-
                 <li className="nav-item" role="presentation">
                   <button
                     className="nav-link"
@@ -76,7 +79,9 @@ const CartBoxComponent = () => {
                 >
                   <div className="shop-sidebar-cart">
                     <ul className="sidebar-cart-list">
-                      {cartItems.length > 0 ? (
+                      {cartItems.length === 0 ? (
+                        <p className="p-3">No items in cart.</p>
+                      ) : (
                         cartItems.map((item, index) => (
                           <li key={index}>
                             <div className="cart-widget">
@@ -95,7 +100,7 @@ const CartBoxComponent = () => {
                                 </h6>
                                 <div className="d-flex align-items-center">
                                   <div className="btn-quantity light quantity-sm me-3">
-                                    <ProductQtyInput product={item} />
+                                    <CartProductQtyInput product={item} />
                                   </div>
                                   <h6 className="dz-price mb-0">
                                     ₹{item.price * item.qty}
@@ -114,48 +119,63 @@ const CartBoxComponent = () => {
                             </div>
                           </li>
                         ))
-                      ) : (
-                        <li className="text-center">Cart is empty</li>
                       )}
                     </ul>
-                    <div className="cart-total">
-                      <h5 className="mb-0">Subtotal:</h5>
-                      <h5 className="mb-0">₹{subtotal}</h5>
-                    </div>
 
-                    <div className="mt-auto">
-                      <div className="shipping-time">
-                        <div className="dz-icon">
-                          <i className="flaticon flaticon-ship"></i>
+                    {cartItems.length > 0 && (
+                      <>
+                        <div className="cart-total d-flex justify-content-between">
+                          <h5 className="mb-0">Subtotal:</h5>
+                          <h5 className="mb-0">₹{cartTotal.toFixed(2)}</h5>
                         </div>
-                        <div className="shipping-content">
-                          <h6 className="title pe-4">
-                            Congratulations, you've got free shipping!
-                          </h6>
-                          <div className="progress">
-                            <div
-                              className="progress-bar progress-animated border-0"
-                              style={{ width: "75%" }}
-                              role="progressbar"
-                            >
-                              <span className="sr-only">75% Complete</span>
+
+                        <div className="cart-total d-flex justify-content-between mt-2">
+                          <h6 className="mb-0">Shipping:</h6>
+                          <h6 className="mb-0">₹{shippingCharge.toFixed(2)}</h6>
+                        </div>
+
+                        <div className="cart-total d-flex justify-content-between border-top pt-2 mt-2">
+                          <h5 className="mb-0">Total:</h5>
+                          <h5 className="mb-0">₹{grandTotal.toFixed(2)}</h5>
+                        </div>
+
+                        <div className="mt-auto">
+                          <div className="shipping-time">
+                            <div className="dz-icon">
+                              <i className="flaticon flaticon-ship"></i>
+                            </div>
+                            <div className="shipping-content">
+                              <h6 className="title pe-4">
+                                Congratulations, you've got free shipping!
+                              </h6>
+                              <div className="progress">
+                                <div
+                                  className="progress-bar progress-animated border-0"
+                                  style={{ width: "75%" }}
+                                  role="progressbar"
+                                >
+                                  <span className="sr-only">
+                                    75% Complete
+                                  </span>
+                                </div>
+                              </div>
                             </div>
                           </div>
+                          <Link
+                            to="/checkout"
+                            className="btn btn-outline-secondary btn-block m-b20"
+                          >
+                            Checkout
+                          </Link>
+                          <Link
+                            to="/viewcart"
+                            className="btn btn-secondary btn-block"
+                          >
+                            View Cart
+                          </Link>
                         </div>
-                      </div>
-                      <Link
-                        to="/checkout"
-                        className="btn btn-outline-secondary btn-block m-b20"
-                      >
-                        Checkout
-                      </Link>
-                      <Link
-                        to="/viewcart"
-                        className="btn btn-secondary btn-block"
-                      >
-                        View Cart
-                      </Link>
-                    </div>
+                      </>
+                    )}
                   </div>
                 </div>
 

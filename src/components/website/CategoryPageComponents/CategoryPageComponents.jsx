@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductSideMenuPageComponents from "../ProductPageComponents/ProductSideMenuPageComponents";
-import { CartContext } from "../../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const CategoryPageComponents = ({ category_id, category_slug }) => {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useCart();
 
   const webURL = import.meta.env.VITE_WEBSITE_APP_API_BASE_URL;
   const imgUrl = import.meta.env.VITE_REACT_APP_STORAGE_URL;
