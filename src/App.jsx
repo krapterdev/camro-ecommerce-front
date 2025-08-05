@@ -19,6 +19,7 @@ import AccountOrderDetails from "./pages/website/AccountOrderDetails";
 import AccountCancellationRequests from "./pages/website/AccountCancellationRequests";
 import AccountRefundRequestsConfirmed from "./pages/website/AccountRefundRequestsConfirmed";
 import AccountProfile from "./pages/website/AccountProfile";
+import UserVerify from "./pages/website/UserVerify";
 
 
 // 🐢 Lazy load website pages
@@ -73,7 +74,7 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget/:token" element={<LogIn />} />
-          <Route path="/verify-user/:token" element={<LogIn />} />
+          <Route path="/user-verify/:token" element={<UserVerify />} />
           {/* <Route path="/user-dashboard" element={<LogIn />} /> */}
           <Route path="/orders" element={<LogIn />} />
           <Route path="/shopping-cart" element={<ShoppingCart />} />

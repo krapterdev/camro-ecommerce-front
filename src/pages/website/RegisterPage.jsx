@@ -25,6 +25,7 @@ const RegisterPage = () => {
     state: "Rajasthan",
     zip_code: "",
     street_address: "",
+    template: "email_verification",
   });
 
   const [errors, setErrors] = useState({});
