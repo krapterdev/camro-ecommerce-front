@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import WishlistBoxComponent from "./WishlistBoxComponent";
 import CartProductQtyInput from "./CartProductQtyInput";
+import { AuthContext } from "../../context/AuthContext";
 
 const CartBoxComponent = () => {
-  const {
-    cartItems,
-    removeFromCart,
-    cartTotal,
-    shippingCharge,
-    grandTotal,
-  } = useCart();
+  const { user } = React.useContext(AuthContext);
+
+  const { cartItems, removeFromCart, cartTotal, shippingCharge, grandTotal } =
+    useCart();
 
   const totalCartItems = () =>
     cartItems.reduce((acc, item) => acc + item.qty, 0);
@@ -154,15 +152,13 @@ const CartBoxComponent = () => {
                                   style={{ width: "75%" }}
                                   role="progressbar"
                                 >
-                                  <span className="sr-only">
-                                    75% Complete
-                                  </span>
+                                  <span className="sr-only">75% Complete</span>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <Link
-                            to="/checkout"
+                            to={user ? "/checkout" : "/login"}
                             className="btn btn-outline-secondary btn-block m-b20"
                           >
                             Checkout

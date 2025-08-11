@@ -40,8 +40,28 @@ export const AuthProvider = ({ children }) => {
 
       localStorage.setItem("authToken", res.data.token);
       setUser(res.data.user);
-
       toast.success("Login successful 🚀");
+
+      const redirectPath = localStorage.getItem("redirectAfterLogin");
+      let targetPath = "/user-dashboard"; // default path
+
+      if (redirectPath) {
+        if (redirectPath === "/cart" || redirectPath === "/viewcart") {
+          targetPath = "/checkout";
+        } else if (
+          redirectPath === "/login" ||
+          redirectPath === "/register"
+        ) {
+          targetPath = "/user-dashboard";
+        }
+      }
+
+      localStorage.removeItem("redirectAfterLogin");
+
+      // Redirect user
+      window.location.href = targetPath;
+      
+
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed ❌");
       setUser(null);

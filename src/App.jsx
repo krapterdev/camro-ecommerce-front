@@ -1,11 +1,12 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/website/PrivateRoute";
+import PublicRoute from "./components/website/PublicRoute";
 
 // Layouts
 import WebsiteLayout from "./layouts/WebsiteLayout";
 import AdminLayout from "./layouts/AdminLayout";
 
-import Email from "./pages/website/Email";
 import Checkout from "./pages/website/Checkout";
 import AddProductSize from "./pages/admin/AddProductSize";
 import ListProductSize from "./pages/admin/ListProductSize";
@@ -20,7 +21,6 @@ import AccountCancellationRequests from "./pages/website/AccountCancellationRequ
 import AccountRefundRequestsConfirmed from "./pages/website/AccountRefundRequestsConfirmed";
 import AccountProfile from "./pages/website/AccountProfile";
 import UserVerify from "./pages/website/UserVerify";
-
 
 // 🐢 Lazy load website pages
 const Home = lazy(() => import("./pages/website/Home"));
@@ -60,32 +60,50 @@ function App() {
     >
       <Routes>
         {/* Website Routes */}
+        {/* Website Routes */}
         <Route element={<WebsiteLayout />}>
+          {/* Public pages */}
           <Route path="/" element={<Home />} />
-          <Route path="/email" element={<Email />} />
           <Route path="/about" element={<About />} />
           <Route path="/why-us" element={<WhyChooseUs />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/viewcart" element={<ViewCart />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/viewcart" element={<ViewCart />} />
           <Route path="/:category" element={<CategoryPage />} />
-          <Route path="/:category/:productDetail" element={<ProductDetailPage />} />
-          {/* <Route path="/:category/:slug" element={<ProductDetailPage />} /> */}
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forget/:token" element={<LogIn />} />
-          <Route path="/user-verify/:token" element={<UserVerify />} />
-          {/* <Route path="/user-dashboard" element={<LogIn />} /> */}
-          <Route path="/orders" element={<LogIn />} />
-          <Route path="/shopping-cart" element={<ShoppingCart />} />
-          {/* user dashboard */}
-          <Route path="/user-dashboard" element={<AccountDashboard />} />
-          <Route path="/user-orders" element={<AccountOrders />} />
-          <Route path="/user-address" element={<AccountAddress />} />
-          <Route path="/user-order-details" element={<AccountOrderDetails />} />
-          <Route path="/user-cancellation-requests" element={<AccountCancellationRequests />} />
-          <Route path="/user-refund-requests" element={<AccountRefundRequestsConfirmed />} />
-          <Route path="/user-profile" element={<AccountProfile />} />
+          <Route
+            path="/:category/:productDetail"
+            element={<ProductDetailPage />}
+          />
+
+          <Route element={<PublicRoute />}>
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forget/:token" element={<LogIn />} />
+            <Route path="/user-verify/:token" element={<UserVerify />} />
+          </Route>
+          {/* Protected pages (🔐 inside PrivateRoute) */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders" element={<LogIn />} />
+            {/* consider replacing */}
+            <Route path="/shopping-cart" element={<ShoppingCart />} />
+            {/* user dashboard */}
+            <Route path="/user-dashboard" element={<AccountDashboard />} />
+            <Route path="/user-orders" element={<AccountOrders />} />
+            <Route path="/user-address" element={<AccountAddress />} />
+            <Route
+              path="/user-order-details"
+              element={<AccountOrderDetails />}
+            />
+            <Route
+              path="/user-cancellation-requests"
+              element={<AccountCancellationRequests />}
+            />
+            <Route
+              path="/user-refund-requests"
+              element={<AccountRefundRequestsConfirmed />}
+            />
+            <Route path="/user-profile" element={<AccountProfile />} />
+          </Route>
         </Route>
 
         {/* Admin Routes */}
@@ -99,7 +117,6 @@ function App() {
 
           {/* products routes */}
           <Route path="products">
-
             {/* Product (main) routes */}
             <Route path="add" element={<AddProduct />} />
             <Route path="add/:productId" element={<AddProduct />} />

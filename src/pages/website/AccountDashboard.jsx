@@ -21,13 +21,13 @@ function AccountDashboard() {
               <div className="sticky-top account-sidebar-wrapper">
                 <div className="account-sidebar" id="accountSidebar">
                   <div className="profile-head">
-                    <div className="user-thumb">
+                    {/* <div className="user-thumb">
                       <img
                         className="rounded-circle"
                         src="images/profile4.jpg"
                         alt="Susan Gardner"
                       />
-                    </div>
+                    </div> */}
                     <h5 className="title mb-0">Sahil Kumar</h5>
                     <span className="text text-primary">
                       info@sahilkumar.com
